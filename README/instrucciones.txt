@@ -1,0 +1,13 @@
+
+
+Primero crear la BD.
+
+$this->BaseDatos = "ingresos";
+$this->Servidor = "localhost";
+$this->Usuario = "ingresosuser";
+$this->Clave = "ingreso321";
+
+
+Crear el usuario "ingresosuser"
+
+La clave debe ser : "ingreso321"
