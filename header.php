@@ -11,12 +11,66 @@
 
     <!-- Bootstrap Core CSS -->
  <script src="js/jquery.js"></script>
-  
+
+
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
+
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sb-admin-2.css" rel="stylesheet">
   
   
+
+
+<script type="text/javascript">
+    $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#fecha").mask("99/99/9999",{completed:function(){alert("Fecha Correcta");}});
+        
+        
+        $("#rut").mask("99999999");
+        $("#telefono").mask("999999999");
+
+
+        /*
+        $("#phoneExt").mask("(999) 999-9999? x99999");
+        $("#iphone").mask("+33 999 999 999");
+        $("#tin").mask("99-9999999");
+        $("#ssn").mask("999-99-9999");
+        $("#product").mask("a*-999-a999", { placeholder: " " });
+        $("#eyescript").mask("~9.99 ~9.99 999");
+        $("#po").mask("PO: aaa-999-***");
+        $("#pct").mask("99%");
+
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+
+        */
+    });
+    
+</script>
+
+ 
+             <script type="text/javascript">
+  $(document).ready(function() {
+      $('#nombres').keypress(function(key) {
+
+          if(key.charCode < 97 || key.charCode > 122 || inputValue != 32){
+            return false
+            };
+
+      });
+
+      $('#apellidos').keypress(function(key) {
+          if(key.charCode < 97 || key.charCode > 122) return false;
+      });
+  });
+  </script>
+
 
 
     <!-- Custom CSS -->

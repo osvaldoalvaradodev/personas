@@ -26,17 +26,25 @@ valida_usuario(98);
 
                <?php 
                if (isset($_SESSION['rutnuevousuario'])){
-               	echo "<input type='text' class='form-control' id='rut' name='rut' placeholder='Nombre' value='".$_SESSION['rutnuevousuario']."'>";
+               	echo "<input type='text' class='form-control' id='rut' name='rut' placeholder='17123123' value='".$_SESSION['rutnuevousuario']."'>";
                }
                else{
-               		echo "<input type='text' class='form-control' id='rut' name='rut' placeholder='Nombre'>";
+               		echo "<input type='text' class='form-control' id='rut' name='rut' placeholder='17123123'>";
                }
                ?>
+
+         
+
                 
-                     
+               
                         <label for="ejemplo_email_1">Nombres:</label>
                 <input type="text" class="form-control" id="nombres"
                        name ="nombres" placeholder="Juan">
+
+                 
+                       
+                       
+
 
                         <label for="ejemplo_email_1">Apellidos:</label>
                 <input type="text" class="form-control" id="apellidos"
