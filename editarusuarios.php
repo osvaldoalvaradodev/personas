@@ -60,21 +60,28 @@ $numregistros = mysql_num_rows($buscarregistros);
 
 
 
-    echo '<table class="table table-hover">';
-echo '<thead><tr><td>Rut</td><td>Nombre</td><td>Apellido</td><td>Telefono</td><td>Direccion</td><td>Area</td><td>Email</td><td>Estado</td><td>Editar</td></tr></thead>';
+    echo '<table class="table table-bordered">';
+echo '<thead><tr><td>Rut</td><td>Nombre</td><td>Apellido</td><td>Telefono</td><td>Direccion</td><td>Area</td><td>Email</td><td>Notas</td><td>Fotos</td><td>Estado</td><td>Editar</td></tr></thead>';
 for ($i=0; $i<$numregistros; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros);
 $numlista = $i + 1;
 
-echo '<td>'.$fila['rut'].'</td>';
+echo '<tr><td>'.$fila['rut'].'</td>';
 echo '<td>'.$fila['nombre_persona'].'</td>';
 echo '<td>'.$fila['apellido'].'</td>';
 echo '<td>'.$fila['telefono'].'</td>';
 echo '<td>'.$fila['direccion'].'</td>';
 echo '<td>'.utf8_encode($fila['nombre_area']).'</td>';
 echo '<td>'.$fila['email'].'</td>';
+echo '<td>'.$fila['notas'].'</td>';
+            $nombre_fichero = 'fotos/'.$fila['rut'].'.jpg';
+            if (file_exists($nombre_fichero)) {     
 
+                echo "<td><span class='label label-success'><span class='glyphicon glyphicon-camera' aria-hidden='true'></span></span></td>";
+            } else {
+                echo "<td></td>";
+            }
 
 
 
@@ -86,7 +93,7 @@ echo '<td>'.$fila['email'].'</td>';
           else{
               echo '<td><span class="label label-danger">Inactivo</span></td>';
           }
-echo "<td><a href='procesaeditarusuario.php?rut=".$fila['rut']."&nombre=".$fila['nombre_persona']."&apellido=".$fila['apellido']."&telefono=".$fila['telefono']."&direccion=".$fila['direccion']."&email=".$fila['id_area']."&id_area=".$fila['id_area']."&email=".$fila['email']."&estado=".$fila['estado']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span> Editar</a></td>";
+echo "<td><a href='procesaeditarusuario.php?rut=".$fila['rut']."&nombre=".$fila['nombre_persona']."&apellido=".$fila['apellido']."&telefono=".$fila['telefono']."&direccion=".$fila['direccion']."&email=".$fila['id_area']."&id_area=".$fila['id_area']."&notas=".$fila['notas']."&email=".$fila['email']."&estado=".$fila['estado']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span> Editar</a></td>";
         
 
 echo '</tr>';

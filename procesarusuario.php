@@ -24,7 +24,7 @@
       $direccion =$_POST['direccion'];
        $area =$_POST['area'];
        $varRut = $rut;
-    
+      $varNotas = $_POST['notas'];
     
     
     try{
@@ -67,7 +67,7 @@
 
     $con = new DB;
     $crearpersona = $con->conectar();
-    $strConsulta = "INSERT INTO `personas` (`rut`, `nombre`, `apellido`,`email`,`telefono`,`direccion`,`id_area`) VALUES ('$rut', '$nombres', '$apellidos','$mail','$telefono','$direccion','$area');";
+    $strConsulta = "INSERT INTO `personas` (`rut`, `nombre`, `apellido`,`email`,`telefono`,`direccion`,`id_area`,`notas`) VALUES ('$rut', '$nombres', '$apellidos','$mail','$telefono','$direccion','$area','$varNotas');";
     //echo $strConsulta;
 
    $crearpersona = mysql_query($strConsulta);

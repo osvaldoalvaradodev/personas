@@ -62,6 +62,9 @@ valida_usuario(98);
                 <input type="text" class="form-control" id="telefono"
                        name ="telefono" placeholder="978946589">
                        
+                          <label for="ejemplo_email_1">Observaciones (Patente Vehiculo, Embarcacion, etc)</label>
+                <input type="text" class="form-control" id="notas"
+                       name ="notas" placeholder="CZ-AB-12">
 
 
 
@@ -90,7 +93,6 @@ valida_usuario(98);
 
                                 echo "<option value ='".$fila['id']."'>".utf8_encode($fila['nombre'])."</option>";
                                 }
-
                        ?>
                          
                         

@@ -42,7 +42,9 @@ valida_usuario(98);
 
 
 			    //si el rut es * CUALQUIERA
-			    if ($_GET['rut']=='*'){
+			    if ($_GET['rut']==""){
+
+              //echo "seteado";
 			    	 $strConsulta = "select 
 
              personas.nombre,personas.apellido,personas.rut,registro.registro,registro.tipo,

@@ -34,6 +34,7 @@ $varDireccion = $_GET['direccion'];
 $varEmail = $_GET['email'];
 $varEstado =  $_GET['estado'];
 $varArea = $_GET['id_area'];
+$varNotas = $_GET['notas'];
 ?>
 
 
@@ -126,6 +127,18 @@ $varArea = $_GET['id_area'];
                        name ="email" value =<?php echo $varEmail;?>> 
                         </div>
                          </div>
+
+
+                                <div class="form-group">
+                        <label class="control-label col-sm-2" for="ejemplo_email_1">Observaciones (Patente,Embarcación,Etc)</label>  
+                           <div class="col-sm-5">     
+                 <input type="text" class="form-control" id="notas"
+                       name ="notas" value =<?php echo $varNotas;?>> 
+                        </div>
+                         </div>
+
+
+
                       <div class="form-group">
 
                        <label class="control-label col-sm-2" for="cajonestado">Estado Actual:</label> 
@@ -136,29 +149,68 @@ $varArea = $_GET['id_area'];
                        if ($varEstado=='1'){
 
 
-                  echo '<span class="label label-success">Activo</span>';  
-                  }
-                  else{
-                      echo '<span class="label label-danger">Inactivo</span>';
-                  }
+                      echo '<span class="label label-success">Activo</span>';  
+                      }
+                      else{
+                          echo '<span class="label label-danger">Inactivo</span>';
+                      }
 
-                       ?>
+                           ?>
                        
                      </h3>
                           </div>
                           </div>
+
+
+                        <?php 
+                        
+                        
+                        ?>
             <div class="form-group">
             <label  class="control-label col-sm-2" for="estado">Actualizar Estado:</label>
             <div class="col-sm-5">  
             <select class="form-control" id="estado" name="estado">
-              <option value ='1'>Habilitar</option>
-              <option value='0'>Desabilitar</option>
+              <option <?php if ($varEstado == 1) echo 'selected ' ;?> value='1'>Habilitar</option>
+              <option <?php if ($varEstado == 0) echo 'selected '?> value='0'>Desabilitar</option>
              
             </select>
+            </div>
+            </div>
 
-            </div>
-            
-            </div>
+
+                  <?php 
+                    include_once("conexion.php");
+                        $strConsulta = "select * from area";
+                        $con = new DB;
+                        $buscarregistros = $con->conectar();
+                     $buscarregistros = mysql_query($strConsulta);
+                     $numregistros = mysql_num_rows($buscarregistros);
+                  ?>
+
+
+                        <div class="form-group">
+                        <label  class="control-label col-sm-2" for="estado">Area:</label>
+                         <div class="col-sm-5">
+                        <select class="form-control" id="area" name="area">
+                        
+                        <?php
+                        for ($i=0; $i<$numregistros; $i++)
+                                {
+                                $fila = mysql_fetch_array($buscarregistros);
+                                $numlista = $i + 1;
+                                echo "<option ";
+                                if ($fila['id'] == $varArea ) echo 'selected ' ;
+                                echo "value ='".$fila['id']."'>".utf8_encode($fila['nombre'])."</option>";
+                                }
+
+                       ?>
+                         
+                        
+                        </select>
+                        </div>
+                        </div>
+
+
                  <div class="form-group">
                  <label  class="control-label col-sm-2" for="nohacenada"></label>
                  <div class="col-sm-9"> 

@@ -27,8 +27,6 @@
     $(function() {
         $.mask.definitions['~'] = "[+-]";
         $("#fecha").mask("99/99/9999",{completed:function(){alert("Fecha Correcta");}});
-        
-        
         $("#rut").mask("99999999");
         $("#telefono").mask("999999999");
 
@@ -58,7 +56,7 @@
              <script type="text/javascript">
              //valida que se pueda ingresar solo texto en un textbox y espacios
   $(document).ready(function() {
-      $('#nombres,#apellidos').keypress(function(key) {
+      $('#nombres,#apellidos,#nombre,#apellido').keypress(function(key) {
 
           if ((key.charCode < 97 || key.charCode > 122)//letras mayusculas
                 && (key.charCode < 65 || key.charCode > 90) //letras minusculas

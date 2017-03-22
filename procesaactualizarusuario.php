@@ -20,9 +20,12 @@ $varTelefono = $_POST['telefono'];
 $varDireccion = $_POST['direccion'];
 $varEmail = $_POST['email'];
 $varEstado =  $_POST['estado'];
+$varNotas = $_POST['notas'];
+$varArea = $_POST['area'];
+
     $con = new DB;
     $crearpersona = $con->conectar();
-    $strConsulta = "update `personas` set `nombre` = '$varNombre', `apellido` = '$varApellido',`email` = '$varEmail',`telefono` = '$varTelefono',`direccion` ='$varDireccion',`estado` = '$varEstado' where `rut` = $varRut;";
+    $strConsulta = "update `personas` set `nombre` = '$varNombre', `apellido` = '$varApellido',`email` = '$varEmail',`telefono` = '$varTelefono',`direccion` ='$varDireccion',`estado` = '$varEstado',`notas` = '$varNotas',`id_area` = '$varArea' where `rut` = $varRut;";
     $crearpersona = mysql_query($strConsulta);
     
 
