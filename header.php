@@ -10,19 +10,62 @@
     <title>Contador de Personas<?php echo(" ".date("d-m-Y"));?></title>
 
     <!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/jquery.dataTables.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/buttons.dataTables.css">
+
+
  <script src="js/jquery.js"></script>
-
-
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
 
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+  <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="js/dataTables.buttons.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="js/buttons.print.js">
+  </script>
+<script type="text/javascript" language="javascript" src="js/buttons.flash.js">
+  </script>
   
   
 
+<script type="text/javascript" class="init">
+  $(document).ready(function() {
+      $('#tablausuarios').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
 
+
+              'print','excel'
+            ],
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina &nbsp;&nbsp;&nbsp;",
+            "zeroRecords": "No se encuentra esa coincidencia",
+            "info": "Pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros",
+            "print" : "Imprimir",
+            "infoFiltered": "(buscando entre _MAX_ registros)",
+            "search":         "Buscar : &nbsp",
+               paginate: {
+                first:      "Primera Pagina",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Ultima"
+            }
+
+
+
+        }
+
+
+
+      });
+  } );
+
+</script>
 <script type="text/javascript">
     $(function() {
         $.mask.definitions['~'] = "[+-]";
@@ -74,7 +117,6 @@
                  && (key.charCode != 205) //Í
                  && (key.charCode != 211) //Ó
                  && (key.charCode != 218) //Ú
- 
                 )
                 return false;
 

@@ -91,7 +91,7 @@
                                   Ingresos<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a href="index.php">Registrar Ingreso</a></li>
+                                  <li><a href="agregaringreso.php">Registrar Ingreso</a></li>
                                   <li><a href="agregarsalida.php">Registrar Salida</a></li>
                                  </ul>
                             </li>

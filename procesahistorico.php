@@ -101,7 +101,9 @@ valida_usuario(98);
       echo "<a href='excel2/app/reportes/generarreporte.php' class='btn btn-success'>
     <span class='glyphicon glyphicon-print'></span> Descargar Reporte en Excel
   </a>";
-    echo '<table class="table">';
+
+  echo "<div class='span12'>.</div>";
+    echo '<table class="table" id="tablausuarios">';
 echo '<thead><tr><td>No.</td><td>Registro</td><td>Rut</td><td>Nombre</td><td>Apellido</td><td>Tipo</td></tr></thead>';
 for ($i=0; $i<$numregistros; $i++)
 {

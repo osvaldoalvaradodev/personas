@@ -7,29 +7,26 @@
 <?php include('navbar.php');?>
     <!-- Page Content -->
     <div class="container">
-                    <form action="procesaringreso.php" method="POST">
-              <div class="form-group">
-            
-              <p>Ingrese el rut de la persona a continuacion:</p>
-                <div>
-                
-                </div>
-                  <div class="col-xs-4">
-                   <label for="rut">Rut</label>
-                <input type="text" class="form-control" id="rut"
-                       name ="rut" placeholder="17123123-0">
 
+      <div class="panel panel-success">
+  <div class="panel-heading">    <h1>Bienvenido al sistema de control Puerto Quellón</h1></div>
+  <div class="panel-body">
+    <p><h3>Funciones:</h3></p>
+    <p>- Contabilizar Ingresos y salidas de Personas.</p>
+    <p>- Visualizar en tiempo real la cantidad de personal al interior del resinto.</p>
+    <p>- Emitir reportes diarios.</p>
+    <br>
+    <br>
 
-<label for="boton1"></label>
-                         <button type="submit" class="btn btn-default" id="boton1" name="boton1">Enviar</button>
-                </div>
+    <span>Realizado bajo licencia GPL con ♥ en Chiloe<span>
+  </div>
 
-        
-                <div class="col-xs-4">
-                 
-                  </div>
-              </div>   
+</div>
+           
             </div>
+
+
+
     </form>
 
 
@@ -39,6 +36,8 @@
 
     </div>
     <!-- /.container -->
+
+   
 
    
 </body>

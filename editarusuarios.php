@@ -60,8 +60,8 @@ $numregistros = mysql_num_rows($buscarregistros);
 
 
 
-    echo '<table class="table table-bordered">';
-echo '<thead><tr><td>Rut</td><td>Nombre</td><td>Apellido</td><td>Telefono</td><td>Direccion</td><td>Area</td><td>Email</td><td>Notas</td><td>Fotos</td><td>Estado</td><td>Editar</td></tr></thead>';
+    echo '<table class="display" id="tablausuarios" cellspacing="0" width="100%">';
+echo '<thead><tr><th>Rut</th><th>Nombre</th><td>Apellido</td><td>Telefono</td><td>Direccion</td><td>Area</td><td>Email</td><td>Notas</td><td>Fotos</td><td>Estado</td><td>Editar</td></tr></thead>';
 for ($i=0; $i<$numregistros; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros);

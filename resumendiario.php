@@ -229,7 +229,7 @@ echo "</table>";*/
 
 
 <?php 
-        echo '<table class="table">';
+        echo '<table class="table" id="tablausuarios">';
 echo '<thead><tr><td><b>No.</b></td><td><b>Rut</b></td><td><b>Nombre</b></td><td><b>Apellido</b></td><td><b>Area</b></td><td><b>Foto</b></td><td><b>Ultimo Ingreso</b></td><td><b>Ultima Salida</b></td></tr></thead>';
 
 
