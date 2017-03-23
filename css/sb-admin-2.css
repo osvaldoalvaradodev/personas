@@ -184,6 +184,8 @@ table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
   background: transparent;
 }
+
+/*
 table.dataTable thead .sorting_asc:after {
   content: "\f0de";
   float: right;
@@ -200,7 +202,7 @@ table.dataTable thead .sorting:after {
   font-family: fontawesome;
   color: rgba(50, 50, 50, 0.5);
 }
-
+*/
 
 
 .btn-circle {

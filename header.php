@@ -13,6 +13,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin-2.css" rel="stylesheet">
 <link href="css/jquery.dataTables.css" rel="stylesheet">
+<link href="css/font-awesome.css" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.css">
 
 
