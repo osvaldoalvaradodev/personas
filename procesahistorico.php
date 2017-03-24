@@ -56,8 +56,12 @@ valida_usuario(98);
             end as tipo2,
             year(registro.registro) as ano,
             month(registro.registro) as mes,
-            day(registro.registro) as dia
-              from registro inner join personas on personas.rut = registro.rut WHERE date_format(registro,'%d/%m/%Y') = date_format(str_to_date('$fechaBuscar','%d/%m/%Y'),'%d/%m/%Y') $tipoStr order by registro asc";
+            day(registro.registro) as dia,
+            area.nombre as nombre_area
+              from registro inner join personas on personas.rut = registro.rut
+              inner join area on personas.id_area = area.id
+
+               WHERE date_format(registro,'%d/%m/%Y') = date_format(str_to_date('$fechaBuscar','%d/%m/%Y'),'%d/%m/%Y') $tipoStr order by registro asc";
 			    }
 			    //si el rut esta seteado
 			       else{
@@ -71,8 +75,12 @@ valida_usuario(98);
                 end as tipo2,
                 year(registro.registro) as ano,
                 month(registro.registro) as mes,
-                day(registro.registro) as dia
-             from registro inner join personas on personas.rut = registro.rut WHERE date_format(registro,'%d/%m/%Y') = date_format(str_to_date('$fechaBuscar','%d/%m/%Y'),'%d/%m/%Y') and registro.rut = $rut $tipoStr order by registro asc";
+                day(registro.registro) as dia,
+                area.nombre as nombre_area
+             from registro inner join personas on personas.rut = registro.rut
+             inner join area on personas.id_area = area.id
+
+              WHERE date_format(registro,'%d/%m/%Y') = date_format(str_to_date('$fechaBuscar','%d/%m/%Y'),'%d/%m/%Y') and registro.rut = $rut $tipoStr order by registro asc";
 
 
 			    }
@@ -98,13 +106,13 @@ valida_usuario(98);
       //echo "<a href='excel2/app/reportes/generarreporte.php'>Reporte</a>";
 
 
-      echo "<a href='excel2/app/reportes/generarreporte.php' class='btn btn-success'>
+     /* echo "<a href='excel2/app/reportes/generarreporte.php' class='btn btn-success'>
     <span class='glyphicon glyphicon-print'></span> Descargar Reporte en Excel
-  </a>";
+  </a>";*/
 
   echo "<div class='span12'>.</div>";
     echo '<table class="table" id="tablausuarios">';
-echo '<thead><tr><td>No.</td><td>Registro</td><td>Rut</td><td>Nombre</td><td>Apellido</td><td>Tipo</td></tr></thead>';
+echo '<thead><tr><td>No.</td><td>Registro</td><td>Rut</td><td>Nombre</td><td>Apellido</td><td>Area</td><td>Tipo</td></tr></thead>';
 for ($i=0; $i<$numregistros; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros);
@@ -114,6 +122,7 @@ echo '<td>'.$fila['registro'].'</td>';
 echo '<td>'.$fila['rut'].'</td>';
 echo '<td>'.$fila['nombre'].'</td>';
 echo '<td>'.$fila['apellido'].'</td>';
+echo '<td>'.utf8_encode($fila['nombre_area']).'</td>';
 
           //si es ingreso o salida iluminalo
           if ($fila['tipo']=='1'){

@@ -28,7 +28,7 @@ valida_usuario(98);
 
                 <input type="text" class="form-control" id="fecha" name="fecha" placeholder="dd/mm/aaaa">
 
-                <label for="ejemplo_email_1">Rut: (* todos) </label>
+                <label for="ejemplo_email_1">Rut: (vacio para consultar todos) </label>
 
 
                 <input type="text" class="form-control" id="rut" name="rut" value="*">

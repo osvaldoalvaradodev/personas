@@ -28,7 +28,7 @@
 
 
     //si rut esta seteado consulta los datos de ese rut
-    if(isset($_GET['buscar'])){
+    if(isset($_GET['buscar'])){ 
 
             $rutbuscado = $_GET['buscar'];
             $strConsulta = "select * from registro inner join personas on registro.rut = personas.rut  WHERE day(registro) = DAY(now())   and (personas.rut like '%$rutbuscado%' or personas.nombre like '%$rutbuscado%' or personas.apellido like '%$rutbuscado%') and MONTH(registro) = MONTH(now()) and year(registro) = year(now()) order by registro asc";
@@ -165,32 +165,7 @@
             </div>
 			
 		<div class="container">
-               <form action="resumendiario.php" method="GET">
-              <div class="form-group">
-            
-                  <div class="col-xs-3">
-                 <div class="input-group">
-                  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                  <input type="text" class="form-control" placeholder="rut nombre o apellido" aria-describedby="basic-addon1" id="buscar" name="buscar">
-                  </div>
-                       </div>
-               
-              <button type="submit" class="btn btn-success">Buscar Persona</button> 
-
-              
-              <?php 
-
-                if(isset($_GET['buscar'])){
-
-                 
-                  
-                    echo "<br><br><div class='alert alert-success'><strong>Las personas listadas a continuacion, se encuentran al interior del recinto</strong> </div>";
-                  
-                  
-                }
-              ?>
-              </div>
-            </form>
+        
 
 
 

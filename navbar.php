@@ -88,9 +88,11 @@
                     
                       <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  Ingresos<b class="caret"></b>
+                                  Menu<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
+
+                                  <li><a href="index.php">Inicio</a></li>
                                   <li><a href="agregaringreso.php">Registrar Ingreso</a></li>
                                   <li><a href="agregarsalida.php">Registrar Salida</a></li>
                                  </ul>

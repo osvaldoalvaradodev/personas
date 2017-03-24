@@ -23,6 +23,8 @@
 <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
 
 
+
+
   <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js">
   </script>
   <script type="text/javascript" language="javascript" src="js/dataTables.buttons.js">
@@ -31,7 +33,8 @@
   </script>
 <script type="text/javascript" language="javascript" src="js/buttons.flash.js">
   </script>
-  
+  <script type="text/javascript" language="javascript" src="js/jquery.dataTables.yadcf.js">
+  </script>
   
 
 <script type="text/javascript" class="init">
@@ -41,7 +44,13 @@
             buttons: [
 
 
-              'print','excel'
+                 {
+                 extend: 'print',
+            text: 'Imprimir',
+            autoPrint: true,
+            title: 'asdasd',
+              },'excel',
+           
             ],
             "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina &nbsp;&nbsp;&nbsp;",
@@ -49,6 +58,7 @@
             "info": "Pagina _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros",
             "print" : "Imprimir",
+
             "infoFiltered": "(buscando entre _MAX_ registros)",
             "search":         "Buscar : &nbsp",
                paginate: {
@@ -65,13 +75,20 @@
 
 
       });
+  
+
+
   } );
+
+
 
 </script>
 <script type="text/javascript">
     $(function() {
         $.mask.definitions['~'] = "[+-]";
-        $("#fecha").mask("99/99/9999",{completed:function(){alert("Fecha Correcta");}});
+
+        $("#fecha").mask("99/99/9999");
+        //$("#fecha").mask("99/99/9999",{completed:function(){alert("Fecha Correcta");}});
         $("#rut").mask("99999999");
         $("#telefono").mask("999999999");
 
