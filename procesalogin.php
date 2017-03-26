@@ -31,7 +31,7 @@
 
           
           $_SESSION["nivelusuario"] = $datosUsuario['id_rol_usuario'];
-          redirect('resumendiario.php');
+          redirect('index.php');
 
           
     }

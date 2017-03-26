@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>Contador de Personas<?php echo(" ".date("d-m-Y"));?></title>
+    <title>Sistema Portuario <?php echo(" ".date("d-m-Y"));?></title>
 
     <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
  <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="js/jquery.maskedinput.min.js" type="text/javascript"></script> 
 
 
 
@@ -48,7 +48,7 @@
                  extend: 'print',
             text: 'Imprimir',
             autoPrint: true,
-            title: 'asdasd',
+            //title: 'asdasd',
               },'excel',
            
             ],
@@ -67,31 +67,65 @@
                 next:       "Siguiente",
                 last:       "Ultima"
             }
-
-
-
         }
-
-
-
       });
-  
+    } 
+
+    );
+
+  $(document).ready(function() {
+      $('#tablavehiculos').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
 
 
-  } );
+                 {
+                 extend: 'print',
+            text: 'Imprimir',
 
+            autoPrint: true,
+            //title: 'asdasd',
+              },'excel',
+           
+            ],
 
+            "order": [[ 0, "desc" ]],
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina &nbsp;&nbsp;&nbsp;",
+            "zeroRecords": "No se encuentra esa coincidencia",
+            "info": "Pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros",
+            "print" : "Imprimir",
+
+            "infoFiltered": "(buscando entre _MAX_ registros)",
+            "search":         "Buscar : &nbsp",
+               paginate: {
+                first:      "Primera Pagina",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Ultima"
+            }
+        }
+      });
+    } 
+
+    );
 
 </script>
+
+
+
+
 <script type="text/javascript">
     $(function() {
         $.mask.definitions['~'] = "[+-]";
 
         $("#fecha").mask("99/99/9999");
+        $("#fechabuscar").mask("99/99/9999");
         //$("#fecha").mask("99/99/9999",{completed:function(){alert("Fecha Correcta");}});
         $("#rut").mask("99999999");
         $("#telefono").mask("999999999");
-
+          $("#horainicio").mask("99:99:99");
 
         /*
         $("#phoneExt").mask("(999) 999-9999? x99999");
@@ -164,3 +198,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     </head>
+
+
+    <?php 
+
+?>

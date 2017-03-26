@@ -57,6 +57,39 @@
                              }
 
 
+                             function transforma_fecha_guardar($fechaSTR){
+                              /*
+                                Transforma fecha para poder dejarla en 
+                                formato date, asi guardarla
+                                  
+                                recive dd/mm/YYYY
+                              */
+                                list($d,$m,$y) = explode("/",$fechaSTR);
+                                $timestamp = mktime(0,0,0,$m,$d,$y);
+                               $fechaFormateada = date("Y-m-d",$timestamp);
+                                return $fechaFormateada;
+                             }
+
+
+                            function transforma_fecha_hora_guardar($fechaSTR,$horaString){
+                              /*
+                                Transforma fecha para poder dejarla en 
+                                formato date, recibe
+                                recive dd/mm/YYYY hh:mm:ss
+                              */
+                                list($hora,$minuto,$segundo) = explode(":",$horaString);
+
+                                list($d,$m,$y) = explode("/",$fechaSTR);
+                                $timestamp = mktime($hora,$minuto,$segundo,$m,$d,$y);
+                               $fechaFormateada = date("Y-m-d H:i:s",$timestamp);
+                                return $fechaFormateada;
+                             }
+
+                             function debug_query($strQuery){
+
+                        
+
+                             }
                                                              
                             
 
@@ -93,8 +126,9 @@
                                 <ul class="dropdown-menu">
 
                                   <li><a href="index.php">Inicio</a></li>
-                                  <li><a href="agregaringreso.php">Registrar Ingreso</a></li>
-                                  <li><a href="agregarsalida.php">Registrar Salida</a></li>
+                                  <li><a href="agregaringreso.php">Registrar Ingreso Personas</a></li>
+                                  <li><a href="agregarsalida.php">Registrar Salida Personas</a></li>
+                                   <li><a href="ingresovehiculo.php">Registrar Ingreso Vehiculo</a></li>
                                  </ul>
                             </li>
 
@@ -125,6 +159,16 @@
                                 <ul class="dropdown-menu">
                                   <li><a href="agregarusuario.php">Agregar Nuevo Usuario</a></li>
                                   <li><a href="editarusuarios.php">Editar Usuarios Existentes</a></li>
+                                 </ul>
+                            </li>
+
+                               <li class="dropdown <?php ocultar_elemento(10);?>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  Vehiculos<b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="listadoestacionados.php">Listar Vehiculos</a></li>
+                                  
                                  </ul>
                             </li>
 
