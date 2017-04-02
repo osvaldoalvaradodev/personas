@@ -70,15 +70,19 @@
     $strConsulta = "INSERT INTO `personas` (`rut`, `nombre`, `apellido`,`email`,`telefono`,`direccion`,`id_area`,`notas`) VALUES ('$rut', '$nombres', '$apellidos','$mail','$telefono','$direccion','$area','$varNotas');";
     //echo $strConsulta;
 
-   $crearpersona = mysql_query($strConsulta);
+
+    //echo $strConsulta;
+   //$crearpersona = mysql_query($strConsulta);
         
-        if($crearpersona)
+        if(mysql_query($strConsulta))
         {
               //print_r($_FILES);
     echo("<div class='alert alert-success'><strong>Usuario Creado Con exito!</strong></div>");
+    
+    /*
     echo("<a href='editarusuarios.php' class='btn btn-info' role='button'>
         <span class='glyphicon glyphicon-arrow-left' aria-hidden='true'></span>
-        Volver al Listado de Usuarios</a>");
+        Volver al Listado de Usuarios</a>");*/
 
         }
         else

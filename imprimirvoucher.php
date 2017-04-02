@@ -3,7 +3,7 @@
 require __DIR__ . '/autoload.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-
+use Mike42\Escpos\EscposImage;
 /**
  * Install the printer using USB printing support, and the "Generic / Text Only" driver,
  * then share it (you can use a firewall so that it can only be seen locally).
@@ -20,7 +20,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 
 
-function imprimir_voucher_estacionamiento($numero,$chofer,$patente,$horainicio,$horatermino,$montototal,$comentario){
+function imprimir_voucher_estacionamiento($numero,$chofer,$patente,$horainicio,$horatermino,$montototal,$comentario,$correlativopapel,$cliente){
 try {
     // Enter the share name for your USB printer here
     //$connector = null;  
@@ -28,6 +28,8 @@ try {
 
     /* Print a "Hello world" receipt" */
     $printer = new Printer($connector);
+
+    
     $date=new DateTime();
     $fecha = $date->format('d-m-Y');
 
@@ -35,24 +37,51 @@ try {
     $Chofer =  $chofer;
     $Patente  = $patente;
     $serie = $numero;
-
-    $printer -> text(":::SINDICATO DE PESCADORES ARTESANALES::::\n");
-    $printer -> text(":::::::Fono-Fax 2 681046 - Quellon::::::::\n");
-    $printer -> text("::::::::Control Ingreso Camiones::::::::::\n");
-    $printer -> text("::::::::::::::::::::::::::::::::::::::::::\n\n");
-    $printer -> text("Fecha  : $fecha\n");
+    $img = EscposImage::load("logo1.png");
+    $printer -> graphics($img);
+   
+    $printer -> text("\n\nFecha  : $fecha\n");
     $printer -> text("Numero : $serie\n");
     $printer -> text("Chofer : $Chofer\n");
-    $printer -> text("Patente: $Patente\n\n");
-    $printer -> text("Hora de inicio : $horainicio\n");
-    $printer -> text("Hora de Termino: $horatermino\n");
-    $printer -> text('Monto total    : $'.$montototal);
+    $printer -> text("Patente: $Patente\n");
 
-    
+    if ($cliente != 0) {
+    include_once("conexion.php");
+    $con = new DB;
+    $buscarpersona = $con->conectar();
+    $strConsulta = "select * from cliente where rut_cliente ='$cliente'";
+    $buscarpersona = mysql_query($strConsulta);
+    $numfilas = mysql_num_rows($buscarpersona);
+    $row = mysql_fetch_assoc($buscarpersona);
+    $nombre_cliente = $row['nombre_cliente'];
+    //var_dump($numfilas);
+    if($numfilas >= 1){
+         $printer -> text("Cliente: $nombre_cliente\n");
+    }
    
+    }
+   
+    if ($correlativopapel != 0) {
+    $printer -> text("\nCorrelativo    : $correlativopapel\n");
+    }
+    
+    $printer -> text("Hora de inicio : $horainicio\n");
+
+    if ($horatermino != 0) {
+    $printer -> text("Hora de Termino: $horatermino\n");   
+    }
+    
+  
+    if ($montototal != 0) {
+       $printer -> text('Monto total    : $'.$montototal);
+    }
+    
+    if ($horatermino != 0) {
     $printer -> text("\n");
     $printer -> text("\n\n");
     $printer -> text("Firma: _________________\n");
+    
+    }
     $printer -> text("$comentario\n");
     $printer -> cut();
     /* Close printer */

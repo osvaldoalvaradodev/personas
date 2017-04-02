@@ -7,6 +7,10 @@
 <?php include('navbar.php');?>
     <!-- Page Content -->
     <div class="container">
+
+    <?php 
+valida_usuario(10);
+?>
                     <form action="procesarsalida.php" method="POST">
               <div class="form-group">
             
@@ -17,7 +21,7 @@
                   <div class="col-xs-4">
                    <label for="rut">Rut</label>
                 <input type="text" class="form-control" id="rut"
-                       name ="rut" placeholder="17123123-0">
+                       name ="rut" placeholder="17123123">
 
 
 <label for="boton1"></label>

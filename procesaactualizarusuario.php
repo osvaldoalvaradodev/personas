@@ -13,7 +13,7 @@
 
 
 
-    $varRut = $_POST['rut'];
+    $varRut = $_POST['rutoculto'];
 $varNombre = $_POST['nombre'];
 $varApellido = $_POST['apellido'];
 $varTelefono = $_POST['telefono'];
@@ -33,11 +33,15 @@ $varArea = $_POST['area'];
     
 
         //echo ("Se actualizara la imagen");
+        //var_dump($_POST);
+        //echo $varRut;
          $target_dir = "fotos/";
 
             //$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
             $target_file = $target_dir . $varRut . ".jpg";
+
+            //echo $target_file;
             $uploadOk = 1;
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 

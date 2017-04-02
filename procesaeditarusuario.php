@@ -59,8 +59,8 @@ $varNotas = $_GET['notas'];
                 <span class="label label-primary col-sm-5"> Rut: <?php echo $varRut;?></span>
                 </h2>
         
-                <input type="hidden" class="form-control" id="rut"
-                       name ="rut" value=<?php echo $varRut;?>>
+                <input type="hidden" class="form-control" id="rutoculto"
+                       name ="rutoculto" value='<?php echo $varRut;?>'>
                         </div>
 
                          <div class="form-group">

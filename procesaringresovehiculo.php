@@ -15,8 +15,11 @@
         $fecha = $_POST['fecha'];
          $chofer = $_POST['chofer'];
         $patente = $_POST['patente'];
+          $formapago = $_POST['formapago'];
+            $rut = $_POST['rut'];
 
         $id_tipo_vehiculo = $_POST['tipovehiculo'];
+          $rutcliente = $_POST['rutcliente'];
           $fechaactual = date("Y-m-d");
 
             //parseo la fecha para poder realizar la insercion
@@ -38,12 +41,26 @@
         //echo $fechahoractual;
 
 
-        $strConsulta = "INSERT INTO `ingreso_vehiculos`(`patente`, `chofer`, `fecha_inicio`, `hora_inicio`,`id_tipo`) VALUES ('$patente','$chofer','$fechaTransformada','$horainicio','$id_tipo_vehiculo')";
+        $strConsulta = "INSERT INTO `ingreso_vehiculos`(`patente`, `chofer`, `fecha_inicio`, `hora_inicio`,`id_tipo`,`id_formato_boleta`,`rut`,`rut_cliente`) VALUES ('$patente','$chofer','$fechaTransformada','$horainicio','$id_tipo_vehiculo','$formapago','$rut','$rutcliente')";
 
+
+      
           //  echo $strConsulta;
          if(mysql_query($strConsulta)){
+            $get_id_voucher = mysql_insert_id();
              echo("<div class='alert alert-success'><strong>Ingreso Correcto</strong><br> Se ha ingresado el vehiculo<br><i class='fa fa-check-square-o' aria-hidden='true'></i>
         </strong></div>");
+
+             try{
+             include('imprimirvoucher.php');
+             $comentario = "\n:::::::TICKET DE INGRESO:::::::";
+            imprimir_voucher_estacionamiento($get_id_voucher,$chofer,$patente,$horainicio,0,0,$comentario,0,$rutcliente);
+          } catch (Exception $e) {
+            echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
+          } finally {
+            
+
+          }    
          }
          else {
             echo("<div class='alert alert-danger'><strong>Ingreso Incorrecto</strong> No se ha registrado</strong></div>");

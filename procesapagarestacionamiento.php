@@ -31,6 +31,9 @@ include_once("conexion.php");
 		$hora_inicio =$_GET['horainicio'];
 		$hora_termino=$_GET['horasalida'];
 		$monto_total = $_GET['total'];
+        $rut_cliente = $_GET['rut_cliente'];
+
+        $correlativo_papel = $_GET['correlativo_papel'];
 		//$fecha_inicio_2 =$_GET['fecha_inicio_2'];
 		$comentariooriginal = ":::::::::::::::ORIGINAL:::::::::::::::::::";
 
@@ -39,7 +42,7 @@ include_once("conexion.php");
          $con = new DB;
             $crearpersona = $con->conectar();
             $strConsulta = "update `ingreso_vehiculos` set `hora_termino` = '$hora_termino', `pagado` = '1',
-             `monto` = '$monto_total' where id = $voucher";
+             `monto` = '$monto_total',`correlativo_papel` = '$correlativo_papel' where id = $voucher";
 
             //echo $strConsulta;
            if(mysql_query($strConsulta)){
@@ -57,9 +60,9 @@ include_once("conexion.php");
 
 
     	include('imprimirvoucher.php');
-    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariooriginal);
+    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariooriginal,$correlativo_papel,$rut_cliente);
 
-        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariocliente);
+        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariocliente,$correlativo_papel,$rut_cliente);
     } catch (Exception $e) {
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
     } finally {

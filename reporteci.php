@@ -15,12 +15,15 @@ valida_usuario(10);
      
 
   <!--Contenedor para buscar datos -->
-   <form action="listadoestacionados.php" method="GET">
+   <form action="reporteci.php" method="GET">
               <div class="form-group">
                   <div class="col-xs-3">
                  <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                  <input type="text" class="form-control" placeholder="20/02/2017" aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
+                  <input type="text" class="form-control" placeholder="02" aria-describedby="basic-addon1" id="mesbuscar" name="mesbuscar">
+                   <input type="text" class="form-control" placeholder="2017" aria-describedby="basic-addon1" id="aniobuscar" name="aniobuscar">
+
+                  <input type="text" class="form-control" placeholder="17999388" aria-describedby="basic-addon1" id="rutbuscar" name="rutbuscar">
                   </div>
                        </div>
                        <button type="submit" class="btn btn-default">Buscar</button> 
@@ -32,7 +35,7 @@ valida_usuario(10);
                        </div>
             </form>
 
-
+<br><br><br>
 
 
 
@@ -41,12 +44,12 @@ valida_usuario(10);
           //si el rut es * CUALQUIERA
   
 
-  if(isset($_GET['fechabuscar'])){
-    $busquedaVar =$_GET['fechabuscar'];
-
-     $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
-
-left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where date_format(ingreso_vehiculos.fecha_inicio,'%d/%m/%Y') = date_format(str_to_date('$busquedaVar','%d/%m/%Y') ,'%d/%m/%Y')";
+  if(isset($_GET['mesbuscar'])){
+    $mesbuscado =$_GET['mesbuscar'];
+     $aniobuscado =$_GET['aniobuscar'];
+    $rutbuscado =$_GET['rutbuscar'];
+     $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos` left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo where MONTH(ingreso_vehiculos.fecha_inicio) = $mesbuscado and YEAR(ingreso_vehiculos.fecha_inicio) = $aniobuscado and ingreso_vehiculos.rut = '$rutbuscado'
+and ingreso_vehiculos.id_formato_boleta = 2";
 
      //echo $strConsulta;
   }
@@ -59,22 +62,24 @@ left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_v
 
 //echo($strConsulta);
 
-
+echo $strConsulta;
 
  $con = new DB;
     $buscarregistros = $con->conectar();
 $buscarregistros = mysql_query($strConsulta);
 $numregistros = mysql_num_rows($buscarregistros);
+$montototal = 0;
 
 
 
-
-    echo '<table class="display" id="tablavehiculos" cellspacing="0" width="100%">';
+    echo '<table class="display" id="tablafactura" cellspacing="0" width="100%">';
 echo '<thead><tr><td>Id</td><td>Patente</td><td>Chofer</td><td>Fecha</td><td>Hora Ingreso</td><td>Hora Salida</td><td>Monto</td><td>Pagado</td><td>Acciones</td></tr></thead>';
 for ($i=0; $i<$numregistros; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros);
 $numlista = $i + 1;
+
+
 
 echo '<tr><td>'.$fila['id'].'</td>';
 echo '<td>'.$fila['patente'].'</td>';
@@ -90,7 +95,9 @@ echo '<td>'.$fila['hora_inicio'].'</td>';
               echo '<td>-</td>';
           }
 
+//sumo monto por cada iteracion
 
+          $montototal = $montototal+$fila['monto'];
 echo '<td>'.$fila['monto'].'</td>';
 
             
@@ -104,12 +111,12 @@ echo '<td>'.$fila['monto'].'</td>';
           echo '<td><span class="label label-success">Pagado</span></td>';  
 
 
-              echo "<td><a href='imprimirticket.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&hora_termino=".$fila['hora_termino']."&monto=".$fila['monto']."&correlativo_papel=".$fila['correlativo_papel']."&rut_cliente=".$fila['rut_cliente']."' class='btn btn-default'><span class='glyphicon glyphicon-print'></span>Imprimir</a></td>";
+              echo "<td><a href='imprimirticket.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&hora_termino=".$fila['hora_termino']."&monto=".$fila['monto']."' class='btn btn-default'><span class='glyphicon glyphicon-print'></span>Imprimir</a></td>";
           }
           else{
               echo '<td><span class="label label-danger">No Pagado</span></td>';
           
-              echo "<td><a href='pagarestacionamiento.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&precio=".$fila['precio_tipo_vehiculo']."&id_formato_boleta=".$fila['id_formato_boleta']."&rut=".$fila['rut']."&rut_cliente=".$fila['rut_cliente']."&correlativo_papel=".$fila['correlativo_papel']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span>Pagar</a></td>";
+              echo "<td><a href='pagarestacionamiento.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&precio=".$fila['precio_tipo_vehiculo']."&id_formato_boleta=".$fila['id_formato_boleta']."&rut=".$fila['rut']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span>Pagar</a></td>";
           }
 
         

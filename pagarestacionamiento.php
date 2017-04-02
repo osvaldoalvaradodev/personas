@@ -26,6 +26,28 @@
 	$fecha_inicio=$_GET['fecha_inicio'];
 
   $precio =$_GET['precio'];
+  $rut =$_GET['rut'];
+  $id_formato_boleta =$_GET['id_formato_boleta'];
+  $rut_cliente =$_GET['rut_cliente'];
+
+
+  switch ($id_formato_boleta) {
+    case '1':
+      $str_formato_boleta = "Boleta";
+      break;
+    
+       case '2':
+      $str_formato_boleta = "CI";
+      break;
+    
+       case '3':
+        $str_formato_boleta = "Convenio";
+      break;
+    
+    default:
+       $str_formato_boleta = "Boleta";
+      break;
+  }
 	// The diff-methods returns a new DateInterval-object...
 	$fechahoraactual = date("Y-m-d H:i:s");
 
@@ -89,10 +111,19 @@ $from_time = strtotime(date("H:i:s"));
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Monto Total</label>
+      <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Forma de pago:</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="total" name="total" value='<?php echo($montototal);?>'>
+        <input type="text" class="form-control" id="id_formato_boleta" name="id_formato_boleta" disabled="disabled" value='<?php echo($str_formato_boleta);?>'>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label" >Monto Total</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="total2" disabled="disabled" name="total2" value='<?php echo($montototal);?>'>
+
+        <input type="hidden" class="form-control" id="total" name="total" value='<?php echo($montototal);?>'>
       </div>
     </div>
 
@@ -109,10 +140,62 @@ $from_time = strtotime(date("H:i:s"));
         <input type="text" class="form-control" id="chofer" name="chofer" value='<?php echo($chofer);?>'>
       </div>
     </div>
+
+
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Rut</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="rut" name="rut" value='<?php echo($rut);?>'>
+      </div>
+    </div>
+
+
+
     <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Patente</label>
       <div class="col-sm-4">
         <input type="text" class="form-control" id="patente" name="patente" value='<?php echo($patente);?>'>
+      </div>
+    </div>
+
+
+    <?php 
+    if ($rut_cliente != 0) {
+    include_once("conexion.php");
+    $con = new DB;
+    $buscarpersona2 = $con->conectar();
+
+    //echo $rut_cliente;
+    $strConsulta2 = "select * from cliente where rut_cliente ='$rut_cliente'";
+    $buscarpersona2 = mysql_query($strConsulta2);
+    $numfilas = mysql_num_rows($buscarpersona2);
+    $row = mysql_fetch_assoc($buscarpersona2);
+    $nombre_cliente = $row['nombre_cliente'];
+    //var_dump($numfilas);
+    
+  
+
+    
+     ?>
+          <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre Cliente:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" disabled="disabled" value='<?php echo($nombre_cliente);?>'>
+      </div>
+    </div>
+     <?php } ?>
+  
+
+      <div class="form-group row">
+      <div class="col-sm-4">
+        <input type="hidden" class="form-control" id="rut_cliente" name="rut_cliente" value='<?php echo($rut_cliente);?>'>
+      </div>
+    </div>
+
+      <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Correlativo Papel:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="correlativo_papel" name="correlativo_papel">
       </div>
     </div>
 

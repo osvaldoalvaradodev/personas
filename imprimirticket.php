@@ -30,15 +30,17 @@ include_once("conexion.php");
 		$patente =$_GET['patente'];
 		$hora_inicio =$_GET['hora_inicio'];
 		$hora_termino=$_GET['hora_termino'];
-		$monto_total = $_GET['monto'];
+		$monto_total = $_GET['monto'];    
+        $correlativo_papel = $_GET['correlativo_papel'];
+        $rut_cliente = $_GET['rut_cliente'];
 		//$fecha_inicio_2 =$_GET['fecha_inicio_2'];
 		$comentario = ":::::::::::::::COPIA::::::::::::::::::::::";
 		
 
 
 
-    	include('imprimirvoucher.php');
-    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario);
+    include('imprimirvoucher.php');
+    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario,$correlativo_papel,$rut_cliente);
     } catch (Exception $e) {
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
     } finally {

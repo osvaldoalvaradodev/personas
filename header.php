@@ -110,6 +110,54 @@
     } 
 
     );
+  
+
+    $(document).ready(function() {
+      $('#tablafactura').DataTable({
+            
+
+
+
+            dom: 'lBfrtip',
+            buttons: [
+
+
+                 {
+                 extend: 'print',
+            text: 'Imprimir',
+
+            autoPrint: true,
+            //title: 'asdasd',
+              },'excel',
+           
+            ],
+
+            "order": [[ 0, "desc" ]],
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina &nbsp;&nbsp;&nbsp;",
+            "zeroRecords": "No se encuentra esa coincidencia",
+            "info": "Pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros",
+            "print" : "Imprimir",
+
+            "infoFiltered": "(buscando entre _MAX_ registros)",
+            "search":         "Buscar : &nbsp",
+               paginate: {
+                first:      "Primera Pagina",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Ultima"
+            }
+        }
+
+        
+      });
+    } 
+
+    );
+
+
+
 
 </script>
 

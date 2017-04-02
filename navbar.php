@@ -126,9 +126,9 @@
                                 <ul class="dropdown-menu">
 
                                   <li><a href="index.php">Inicio</a></li>
-                                  <li><a href="agregaringreso.php">Registrar Ingreso Personas</a></li>
-                                  <li><a href="agregarsalida.php">Registrar Salida Personas</a></li>
-                                   <li><a href="ingresovehiculo.php">Registrar Ingreso Vehiculo</a></li>
+                                  <li class="<?php ocultar_elemento(10);?>"><a href="agregaringreso.php">Registrar Ingreso Personas</a></li>
+                                  <li class="<?php ocultar_elemento(10);?>"><a href="agregarsalida.php">Registrar Salida Personas</a></li>
+                                   <li class="<?php ocultar_elemento(10);?>"><a href="ingresovehiculo.php">Registrar Ingreso Vehiculo</a></li>
                                  </ul>
                             </li>
 
@@ -168,7 +168,8 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                   <li><a href="listadoestacionados.php">Listar Vehiculos</a></li>
-                                  
+                                  <li class="<?php ocultar_elemento(99);?>"><a href="reporteci.php">Reporte CI (Factura)</a></li>
+                                  <li  class="<?php ocultar_elemento(99);?>"><a href="reporteconvenio.php">Reporte Convenio</a></li>
                                  </ul>
                             </li>
 

@@ -19,9 +19,13 @@
     <br>
     <br>
 
+
+     <!--
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Registrar Ingreso</button>
 
     <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal2">Registrar Salida</button><br>
+
+     -->
     <span>Realizado bajo licencia GPL con ♥ en Chiloe<span>
   </div>
 

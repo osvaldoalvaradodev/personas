@@ -7,7 +7,9 @@
 <?php include('navbar.php');?>
     <!-- Page Content -->
     <div class="container">
-
+<?php 
+valida_usuario(10);
+?>
 
                     <form action="procesaringreso.php" method="POST">
               <div class="form-group">

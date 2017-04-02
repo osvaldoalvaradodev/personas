@@ -8,7 +8,7 @@
 <?php include('navbar.php');?>
     <!-- Page Content -->
 <?php 
-valida_usuario(98);
+valida_usuario(11);
 ?>
     
 
@@ -112,9 +112,10 @@ valida_usuario(98);
 
               </div>
 
- 
+             
 
               <button type="submit" class="btn btn-default">Guardar</button>
+ <br><br><br>
     </form>
 
         
