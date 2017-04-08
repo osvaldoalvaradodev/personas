@@ -60,7 +60,7 @@
             "print" : "Imprimir",
 
             "infoFiltered": "(buscando entre _MAX_ registros)",
-            "search":         "Buscar : &nbsp",
+            "search":         "Filtrar Registros : &nbsp",
                paginate: {
                 first:      "Primera Pagina",
                 previous:   "Anterior",
@@ -98,7 +98,7 @@
             "print" : "Imprimir",
 
             "infoFiltered": "(buscando entre _MAX_ registros)",
-            "search":         "Buscar : &nbsp",
+            "search":         "Filtrar Registros : &nbsp",
                paginate: {
                 first:      "Primera Pagina",
                 previous:   "Anterior",
@@ -169,11 +169,13 @@
         $.mask.definitions['~'] = "[+-]";
 
         $("#fecha").mask("99/99/9999");
+        $("#fechatermino").mask("99/99/9999");
         $("#fechabuscar").mask("99/99/9999");
         //$("#fecha").mask("99/99/9999",{completed:function(){alert("Fecha Correcta");}});
         $("#rut").mask("99999999");
         $("#telefono").mask("999999999");
           $("#horainicio").mask("99:99:99");
+           $("#horasalida").mask("99:99:99");
 
         /*
         $("#phoneExt").mask("(999) 999-9999? x99999");

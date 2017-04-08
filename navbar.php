@@ -183,10 +183,10 @@
 
 
 
-
-
-                         <ul class="nav navbar-nav navbar-right">
-                         <li><a href="javascript:window.print(); void 0;"><span class="glyphicon glyphicon-print"></span> Imprimir</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                  <!--
+                  Boton para imprimir oculto
+                                            <li><a href="javascript:window.print(); void 0;"><span class="glyphicon glyphicon-print"></span> Imprimir</a></li>-->
 
 
 

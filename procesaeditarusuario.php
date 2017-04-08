@@ -166,6 +166,8 @@ $varNotas = $_GET['notas'];
                         
                         
                         ?>
+
+                        
             <div class="form-group">
             <label  class="control-label col-sm-2" for="estado">Actualizar Estado:</label>
             <div class="col-sm-5">  

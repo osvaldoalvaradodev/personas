@@ -15,10 +15,13 @@ valida_usuario(10);
      
 
   <!--Contenedor para buscar datos -->
+  <span>Ingrese fecha para buscar dias anteriores:</span>
    <form action="listadoestacionados.php" method="GET">
               <div class="form-group">
                   <div class="col-xs-3">
                  <div class="input-group">
+
+
                   <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
                   <input type="text" class="form-control" placeholder="20/02/2017" aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
                   </div>
@@ -44,16 +47,15 @@ valida_usuario(10);
   if(isset($_GET['fechabuscar'])){
     $busquedaVar =$_GET['fechabuscar'];
 
-     $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
-
+     $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos`
 left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where date_format(ingreso_vehiculos.fecha_inicio,'%d/%m/%Y') = date_format(str_to_date('$busquedaVar','%d/%m/%Y') ,'%d/%m/%Y')";
 
      //echo $strConsulta;
   }
   else{
-  $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
+  $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos`
 
-left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where DATE(ingreso_vehiculos.fecha_inicio) = DATE(NOW()) order by ingreso_vehiculos.id desc";
+left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where DATE(ingreso_vehiculos.fecha_inicio) >= DATE(NOW()) - INTERVAL 1 DAY order by ingreso_vehiculos.id desc";
   }
 
 
@@ -67,10 +69,11 @@ $buscarregistros = mysql_query($strConsulta);
 $numregistros = mysql_num_rows($buscarregistros);
 
 
-
+//var_dump(mysql_fetch_array($buscarregistros));
 
     echo '<table class="display" id="tablavehiculos" cellspacing="0" width="100%">';
-echo '<thead><tr><td>Id</td><td>Patente</td><td>Chofer</td><td>Fecha</td><td>Hora Ingreso</td><td>Hora Salida</td><td>Monto</td><td>Pagado</td><td>Acciones</td></tr></thead>';
+echo '<thead><tr><td>Id</td><td>Patente</td><td>Chofer</td><td>Fecha Ingreso</td><td>Fecha Salida</td><td>Hora Ingreso</td><td>Hora Salida</td><td>Monto</td><td>Tipo</td><td>Pagado</td><td>Acciones</td></tr></thead>';
+
 for ($i=0; $i<$numregistros; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros);
@@ -80,6 +83,7 @@ echo '<tr><td>'.$fila['id'].'</td>';
 echo '<td>'.$fila['patente'].'</td>';
 echo '<td>'.$fila['chofer'].'</td>';
 echo '<td>'.$fila['fecha_inicio_2'].'</td>';
+echo '<td>'.$fila['fecha_termino_2'].'</td>';
 echo '<td>'.$fila['hora_inicio'].'</td>';
  if ($fila['pagado']=='1'){
 
@@ -93,27 +97,81 @@ echo '<td>'.$fila['hora_inicio'].'</td>';
 
 echo '<td>'.$fila['monto'].'</td>';
 
-            
-      
 
+switch ($fila['id_formato_boleta']) {
+  case '1':
+    $formatoboleta = '<span class="label label-primary">Boleta</span>';
+    break;
+   case '2':
+     $formatoboleta = '<span class="label label-info">CI</span>';
+    break;
+     case '3':
+     $formatoboleta = '<span class="label label-warning">Conveio</span>';
+    break;
+  default:
+    $formatoboleta = '<span class="label label-primary">Boleta</span>';
+    break;
+}
+   echo '<td>'.$formatoboleta.'</td>';
+ 
+    
+
+
+
+ if ($fila['pagado']=='1'){
+          echo '<td><span class="label label-success">Pagado</span></td>';  
+        }
+         else{
+              echo '<td><span class="label label-danger">No Pagado</span></td>';
+            }
+
+
+?>
+<TD>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Acciones
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    
+    <!--<li><a href="#">HTML</a></li>
+    <li><a href="#">CSS</a></li>
+    <li><a href="#">JavaScript</a></li>-->
+  
+
+
+<?PHP
 
 
  if ($fila['pagado']=='1'){
 
 
-          echo '<td><span class="label label-success">Pagado</span></td>';  
 
 
-              echo "<td><a href='imprimirticket.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&hora_termino=".$fila['hora_termino']."&monto=".$fila['monto']."&correlativo_papel=".$fila['correlativo_papel']."&rut_cliente=".$fila['rut_cliente']."' class='btn btn-default'><span class='glyphicon glyphicon-print'></span>Imprimir</a></td>";
+
+              echo "<li><a href='imprimirticket.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&hora_termino=".$fila['hora_termino']."&monto=".$fila['monto']."&correlativo_papel=".$fila['correlativo_papel']."&rut_cliente=".$fila['rut_cliente']."'><i class='glyphicon glyphicon-print'></i> Imprimir</a></li>";
+              
+
           }
           else{
-              echo '<td><span class="label label-danger">No Pagado</span></td>';
+             
           
-              echo "<td><a href='pagarestacionamiento.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&precio=".$fila['precio_tipo_vehiculo']."&id_formato_boleta=".$fila['id_formato_boleta']."&rut=".$fila['rut']."&rut_cliente=".$fila['rut_cliente']."&correlativo_papel=".$fila['correlativo_papel']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span>Pagar</a></td>";
+              echo "<li><a href='pagarestacionamiento.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&precio=".$fila['precio_tipo_vehiculo']."&id_formato_boleta=".$fila['id_formato_boleta']."&rut=".$fila['rut']."&rut_cliente=".$fila['rut_cliente']."&correlativo_papel=".$fila['correlativo_papel']."'><i class='glyphicon glyphicon-edit'></i> Pagar</a></li>";
           }
+            //esto esta asi para poder concatenar el texto
+            echo "<li><a href='editarregistroestacionamiento.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&precio=".$fila['precio_tipo_vehiculo']."&id_formato_boleta=".$fila['id_formato_boleta']."&rut=".$fila['rut']."&rut_cliente=".$fila['rut_cliente']."&correlativo_papel=".$fila['correlativo_papel']."'";
+            ?>
+            class="<?php ocultar_elemento(98);?>"
+            <?php echo "><i class='glyphicon glyphicon-edit'></i> Editar Registro</a></li>";
+
 
         
+?>
+</ul>
+</div>
+</TD>
 
+
+<?php
 echo '</tr>';
 }
 echo "</table>";

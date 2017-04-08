@@ -19,34 +19,39 @@ include_once("conexion.php");
     <!-- Page Content -->
     <div class="container">
     <?php
-    valida_usuario(10);
+    valida_usuario(98);
     ?>
     <?php 
 
     try {
 
-    	$voucher = $_GET['voucher'];
+    	$voucher = $_GET['id'];
+        $patente =$_GET['patente'];
     	$chofer = $_GET['chofer'];
-		$patente =$_GET['patente'];
+        $fecha_inicio =  $_GET['fecha'];
+
+
+		$pagado =$_GET['pagado'];
 		$hora_inicio =$_GET['horainicio'];
 		$hora_termino=$_GET['horasalida'];
 		$monto_total = $_GET['total'];
+         $rut = $_GET['rut'];
         $rut_cliente = $_GET['rut_cliente'];
-        $fechahoractual = date("Y-m-d H:i:s");
         $correlativo_papel = $_GET['correlativo_papel'];
-		//$fecha_inicio_2 =$_GET['fecha_inicio_2'];
-		$comentariooriginal = ":::::::::::::::ORIGINAL:::::::::::::::::::";
 
-        $comentariocliente = ":::::::::::::::COPIA CLIENTE::::::::::::::";
+        $fecha_termino = $_GET['fechatermino'];
+
+        $fechaTransformadaInicio = transforma_fecha_hora_guardar($fecha_inicio,$hora_inicio);
+       $fechaTransformadaSalida = transforma_fecha_hora_guardar($fecha_termino,$hora_termino);
 		
          $con = new DB;
             $crearpersona = $con->conectar();
-            $strConsulta = "update `ingreso_vehiculos` set `hora_termino` = '$hora_termino', `pagado` = '1',
-             `monto` = '$monto_total',`correlativo_papel` = '$correlativo_papel',`fecha_termino` = '$fechahoractual' where id = $voucher";
+            $strConsulta = "update `ingreso_vehiculos` set `patente` = '$patente',`chofer` = '$chofer',`fecha_inicio` = '$fechaTransformadaInicio',`hora_termino` = '$hora_termino',`hora_inicio` = '$hora_inicio',`pagado` = '$pagado',
+             `monto` = '$monto_total',`correlativo_papel` = '$correlativo_papel',`fecha_termino` = '$fechaTransformadaSalida',`rut` = '$rut',`rut_cliente` = '$rut_cliente' where id = $voucher";
 
             //echo $strConsulta;
            if(mysql_query($strConsulta)){
-            echo "<div class='alert alert-success'><strong>Se ha realizado el pago satisfactoriamente</strong></div>";
+            echo "<div class='alert alert-success'><strong>Se ha realizado la actualizacion correctamente</strong></div>";
 
            }else
            {
@@ -59,10 +64,7 @@ include_once("conexion.php");
 
 
 
-    	include('imprimirvoucher.php');
-    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariooriginal,$correlativo_papel,$rut_cliente);
-
-        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariocliente,$correlativo_papel,$rut_cliente);
+    
     } catch (Exception $e) {
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
     } finally {
