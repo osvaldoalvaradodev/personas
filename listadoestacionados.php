@@ -15,15 +15,15 @@ valida_usuario(10);
      
 
   <!--Contenedor para buscar datos -->
-  <span>Ingrese fecha para buscar dias anteriores:</span>
+  <span><b>Ingrese fecha para buscar dias anteriores:</b></span>
    <form action="listadoestacionados.php" method="GET">
-              <div class="form-group">
+              <div class="well">
                   <div class="col-xs-3">
                  <div class="input-group">
 
 
                   <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                  <input type="text" class="form-control" placeholder="20/02/2017" aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
+                  <input type="text" class="form-control" placeholder="20/02/2017" <?php if(isset($_GET['fechabuscar'])){ echo "value='".$_GET['fechabuscar']."'";} ?> aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
                   </div>
                        </div>
                        <button type="submit" class="btn btn-default">Buscar</button> 
@@ -34,7 +34,7 @@ valida_usuario(10);
                        ?>
                        </div>
             </form>
-
+<br><br>
 
 
 
