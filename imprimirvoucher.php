@@ -20,12 +20,13 @@ use Mike42\Escpos\EscposImage;
 
 
 
-function imprimir_voucher_estacionamiento($numero,$chofer,$patente,$horainicio,$horatermino,$montototal,$comentario,$correlativopapel,$cliente){
+function imprimir_voucher_estacionamiento($numero,$chofer,$patente,$horainicio,$horatermino,$montototal,$comentario,$correlativopapel,$cliente,$fecha_termino){
 try {
     // Enter the share name for your USB printer here
     //$connector = null;  
-    $connector = new WindowsPrintConnector("EPSON TM-T81 Receipt");
-
+    //$connector = new WindowsPrintConnector("EPSON TM-T81 Receipt");
+      $connector = new WindowsPrintConnector("EPSON TM-T20 Receipt");
+   // $connector = new WindowsPrintConnector("doPDF 8");
     /* Print a "Hello world" receipt" */
     $printer = new Printer($connector);
 
@@ -40,7 +41,7 @@ try {
     $img = EscposImage::load("logo1.png");
     $printer -> graphics($img);
    
-    $printer -> text("\n\nFecha  : $fecha\n");
+    
     $printer -> text("Numero : $serie\n");
     $printer -> text("Chofer : $Chofer\n");
     $printer -> text("Patente: $Patente\n");
@@ -64,11 +65,14 @@ try {
     if ($correlativopapel != 0) {
     $printer -> text("\nCorrelativo    : $correlativopapel\n");
     }
-    
-    $printer -> text("Hora de inicio : $horainicio\n");
+    $printer -> text("Fecha Inicio    : $fecha\n");
+    $printer -> text("Hora de inicio  : $horainicio\n");
+
+
 
     if ($horatermino != 0) {
-    $printer -> text("Hora de Termino: $horatermino\n");   
+    $printer -> text("Fecha de Termino: $fecha_termino\n");
+    $printer -> text("Hora de Termino : $horatermino\n");   
     }
     
   
@@ -87,7 +91,7 @@ try {
     /* Close printer */
     $printer -> close();
 
-    echo "<div class='alert alert-success'><strong>Impresion Correcta</strong></div>";
+    echo "<div class='alert alert-success'><strong>Impresion Correcta $comentario</strong></div>";
 } catch (Exception $e) {
     echo "No se pudo imprimir " . $e -> getMessage() . "\n";
 }

@@ -54,7 +54,7 @@
              try{
              include('imprimirvoucher.php');
              $comentario = "\n:::::::TICKET DE INGRESO:::::::";
-            imprimir_voucher_estacionamiento($get_id_voucher,$chofer,$patente,$horainicio,0,0,$comentario,0,$rutcliente);
+            imprimir_voucher_estacionamiento($get_id_voucher,$chofer,$patente,$horainicio,0,0,$comentario,0,$rutcliente,0);
           } catch (Exception $e) {
             echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
           } finally {

@@ -34,7 +34,8 @@ include_once("conexion.php");
         $rut_cliente = $_GET['rut_cliente'];
         $fechahoractual = date("Y-m-d H:i:s");
         $correlativo_papel = $_GET['correlativo_papel'];
-		//$fecha_inicio_2 =$_GET['fecha_inicio_2'];
+		$fecha_inicio_2 =$_GET['fecha_inicio_2'];
+            $fecha_termino_2 =$_GET['fecha_termino_2'];
 		$comentariooriginal = ":::::::::::::::ORIGINAL:::::::::::::::::::";
 
         $comentariocliente = ":::::::::::::::COPIA CLIENTE::::::::::::::";
@@ -60,9 +61,9 @@ include_once("conexion.php");
 
 
     	include('imprimirvoucher.php');
-    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariooriginal,$correlativo_papel,$rut_cliente);
+    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariooriginal,$correlativo_papel,$rut_cliente,$fecha_termino_2);
 
-        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariocliente,$correlativo_papel,$rut_cliente);
+        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentariocliente,$correlativo_papel,$rut_cliente,$fecha_termino_2);
     } catch (Exception $e) {
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
     } finally {

@@ -22,6 +22,9 @@
 	$patente =$_GET['patente'];
 	$chofer = $_GET['chofer'];
 	$fecha_inicio_2 =$_GET['fecha_inicio_2'];
+  $fecha_termino_2 = date("d-m-Y");
+
+  $fecha_hora_actual = date("Y-m-d H:i:s");
 	$hora_inicio =$_GET['hora_inicio'];
 	$fecha_inicio=$_GET['fecha_inicio'];
 
@@ -53,7 +56,7 @@
 
 // Create two new DateTime-objects...
 $date1 = new DateTime($fecha_inicio);
-$date2 = new DateTime(date("Y-m-d H:i:s"));
+$date2 = new DateTime($fecha_hora_actual);
 
 // The diff-methods returns a new DateInterval-object...
 $diff = $date2->diff($date1);
@@ -65,7 +68,13 @@ $diferenciahoras = $diff->format('%h');
 $diferenciaminutos = $diff->format('%m');
 
 
-$montototal = $precio + ($diferenciahoras * $precio);
+//var_dump($fecha_hora_actual,$fecha_inicio);
+$diferenciahoras2 =  (strtotime($fecha_hora_actual) - strtotime($fecha_inicio)) / 3600; 
+
+//convierto a decimal para eliminar la aproximacion
+$diferenciahoras2 = intval($diferenciahoras2);
+
+$montototal = $precio + ($diferenciahoras2 * $precio);
 	$to_time = strtotime($hora_inicio);
 $from_time = strtotime(date("H:i:s"));
 //echo round(abs($to_time - $from_time) / 60,2). " minute";
@@ -87,11 +96,32 @@ $from_time = strtotime(date("H:i:s"));
       </div>
     </div>
 
-        <div class="form-group row">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Fecha</label>
+
+
+     
+      
+      
+
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Fecha Inicio</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" name="fecha" id="fecha"  disabled="disabled" value='<?php echo($fecha_inicio_2);?>'>
+        <input class="form-control" name="fecha_inicio_22" id="fecha_inicio_22"  disabled="disabled" value='<?php echo($fecha_inicio_2);?>'>
       </div>
+      <div class="col-sm-4">
+        <input type="hidden" class="form-control" name="fecha_inicio_2" id="fecha_inicio_2"   value='<?php echo($fecha_inicio_2);?>'>
+      </div>
+    </div>
+
+            <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Fecha Termino</label>
+        <div class="col-sm-4">
+        <input disabled="disabled" class="form-control" name="fecha_termino_22" id="fecha_termino_22"   value='<?php echo($fecha_termino_2);?>'>
+      </div>
+      <div class="col-sm-4">
+        <input type="hidden" class="form-control" name="fecha_termino_2" id="fecha_termino_2"   value='<?php echo($fecha_termino_2);?>'>
+      </div>
+
+       
     </div>
 
        <div class="form-group row">
@@ -107,7 +137,7 @@ $from_time = strtotime(date("H:i:s"));
     <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Horas En Recinto</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="horasdentro" name="horasdentro" disabled="disabled" value='<?php echo($diferenciahoras);?>'>
+        <input type="text" class="form-control" id="horasdentro" name="horasdentro" disabled="disabled" value='<?php echo($diferenciahoras2);?>'>
       </div>
     </div>
 

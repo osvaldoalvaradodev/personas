@@ -148,7 +148,7 @@ switch ($fila['id_formato_boleta']) {
 
 
 
-              echo "<li><a href='imprimirticket.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&hora_termino=".$fila['hora_termino']."&monto=".$fila['monto']."&correlativo_papel=".$fila['correlativo_papel']."&rut_cliente=".$fila['rut_cliente']."'><i class='glyphicon glyphicon-print'></i> Imprimir</a></li>";
+              echo "<li><a href='imprimirticket.php?id=".$fila['id']."&patente=".$fila['patente']."&chofer=".$fila['chofer']."&hora_inicio=".$fila['hora_inicio']."&fecha_inicio=".$fila['fecha_inicio']."&fecha_inicio_2=".$fila['fecha_inicio_2']."&hora_termino=".$fila['hora_termino']."&monto=".$fila['monto']."&correlativo_papel=".$fila['correlativo_papel']."&fecha_termino_2=".$fila['fecha_termino_2']."&rut_cliente=".$fila['rut_cliente']."'><i class='glyphicon glyphicon-print'></i> Imprimir</a></li>";
               
 
           }

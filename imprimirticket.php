@@ -24,7 +24,7 @@ include_once("conexion.php");
     <?php 
 
     try {
-
+        
     	$voucher = $_GET['id'];
     	$chofer = $_GET['chofer'];
 		$patente =$_GET['patente'];
@@ -33,14 +33,17 @@ include_once("conexion.php");
 		$monto_total = $_GET['monto'];    
         $correlativo_papel = $_GET['correlativo_papel'];
         $rut_cliente = $_GET['rut_cliente'];
-		//$fecha_inicio_2 =$_GET['fecha_inicio_2'];
-		$comentario = ":::::::::::::::COPIA::::::::::::::::::::::";
+        $fecha_termino_2 = $_GET['fecha_termino_2'];
+		$fecha_inicio_2 =$_GET['fecha_inicio_2'];
 		
+		$comentario1 = ":::::::::::::::ORIGINAL:::::::::::::::::::";
+        $comentario2 = ":::::::::::::::COPIA CLIENTE::::::::::::::";
 
 
 
     include('imprimirvoucher.php');
-    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario,$correlativo_papel,$rut_cliente);
+    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario1,$correlativo_papel,$rut_cliente,$fecha_termino_2);
+        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario2,$correlativo_papel,$rut_cliente,$fecha_termino_2);
     } catch (Exception $e) {
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
     } finally {
