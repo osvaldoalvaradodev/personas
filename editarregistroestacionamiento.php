@@ -74,6 +74,9 @@ $patente =$row['patente'];
        case '3':
         $str_formato_boleta = "Convenio";
       break;
+           case '4':
+        $str_formato_boleta = "Exentos";
+      break;
     
     default:
        $str_formato_boleta = "Boleta";
@@ -269,13 +272,14 @@ $from_time = strtotime(date("H:i:s"));
 
 
   <div class="form-group row">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Estado Pago </label>
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Tipo de Registro</label>
       <div class="col-sm-4">
      <select class="form-control" id='id_formato_boleta' name='id_formato_boleta'>
              <option value="<?php echo $id_formato_boleta?>"><?php echo $str_formato_boleta;?></option>
-             <option value='0'>Boleta</option>
-              <option value='1'>CI</option>
-                <option value='2'>Factura</option>
+            <option value="1">Boleta</option>
+             <option value="2">CI</option>
+             <option value="3">Convenio</option>
+             <option value="4">Exentos</option>
                        </select>
         </div>
     </div>
@@ -289,13 +293,14 @@ $from_time = strtotime(date("H:i:s"));
         <input type="text" class="form-control" id="correlativo_papel" name="correlativo_papel" value='<?php echo($correlativo_papel);?>'>
       </div>
     </div>
-
-      <button type="submit" class="btn btn-success" id="boton1" name="boton1">Guardar Cambios</button>
+    <label for="inputEmail3" class="col-sm-2 col-form-label">                   </label>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-ban" aria-hidden="true"></i>Eliminar Registro</button>
+      <button type="submit" class="btn btn-success" id="boton1" name="boton1"><i class="fa fa-check" aria-hidden="true"></i>Guardar Cambios</button>
     </form> 
     </div>
    	
     </div>
-
+    <br>
 
 
     </div>
@@ -304,3 +309,30 @@ $from_time = strtotime(date("H:i:s"));
    
 </body>
 </html>
+
+
+<!-- Trigger the modal with a button -->
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Esta Seguro que desea eliminar este Registro?</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿Desea Eliminar Este Registro?</p>
+      </div>
+      <div class="modal-footer">
+      <a <?php echo "href='procesaeliminarestacionamiento.php?id=$id'";?> class="btn btn-danger" role="button">Eliminar Registro</a>
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

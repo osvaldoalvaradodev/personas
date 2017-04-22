@@ -46,6 +46,8 @@
 
                  {
                  extend: 'print',
+                 
+
             text: 'Imprimir',
             autoPrint: true,
             //title: 'asdasd',
@@ -112,51 +114,54 @@
     );
   
 
-    $(document).ready(function() {
-      $('#tablafactura').DataTable({
-            
+    
 
+$(document).ready(function() {
+  $("#tablafactura2").append('<tfoot><th></th><th></th><th></th><th></th><th></th></tfoot>');
+    $('#tablafactura2').DataTable( {
 
-
-            dom: 'lBfrtip',
-            buttons: [
-
-
-                 {
-                 extend: 'print',
-            text: 'Imprimir',
-
-            autoPrint: true,
-            //title: 'asdasd',
-              },'excel',
-           
-            ],
-
-            "order": [[ 0, "desc" ]],
-            "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por pagina &nbsp;&nbsp;&nbsp;",
-            "zeroRecords": "No se encuentra esa coincidencia",
-            "info": "Pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros",
-            "print" : "Imprimir",
-
-            "infoFiltered": "(buscando entre _MAX_ registros)",
-            "search":         "Buscar : &nbsp",
-               paginate: {
-                first:      "Primera Pagina",
-                previous:   "Anterior",
-                next:       "Siguiente",
-                last:       "Ultima"
-            }
+       footerCallback: function ( row, data, start, end, display ) {
+            var api = this.api();
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+ 
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+                         
+            };
+  
+            // Total over all pages
+ 
+                if (api.column(6).data().length){
+                var total = api
+                .column( 6 )
+                .data()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+                } ) }
+                else{ total = 0};
+                 
+  
+            // Total over this page
+             
+            if (api.column(6).data().length){
+            var pageTotal = api
+                .column( 6, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                } ) }
+                else{ pageTotal = 0};
+  
+            // Update footer
+            $( api.column(6).footer() ).html(
+                '$'+pageTotal
+            );
         }
-
-        
-      });
-    } 
-
-    );
-
-
+    } );
+} );
 
 
 </script>
@@ -176,6 +181,11 @@
         $("#telefono").mask("999999999");
           $("#horainicio").mask("99:99:99");
            $("#horasalida").mask("99:99:99");
+
+
+           $("#mesbuscar").mask("99");
+                 $("#aniobuscar").mask("9999");
+                       $("#rutbuscar").mask("99999999");
 
         /*
         $("#phoneExt").mask("(999) 999-9999? x99999");

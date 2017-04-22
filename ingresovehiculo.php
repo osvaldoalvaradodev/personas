@@ -67,6 +67,7 @@
              <option value="1">Boleta</option>
              <option value="2">CI</option>
              <option value="3">Convenio</option>
+             <option value="4">Exentos</option>
         </select>
       </div>
     </div>

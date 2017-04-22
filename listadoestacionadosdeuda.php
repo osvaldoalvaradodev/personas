@@ -15,25 +15,7 @@ valida_usuario(10);
      
 
   <!--Contenedor para buscar datos -->
-  <span><b>Ingrese fecha para buscar dias anteriores:</b></span>
-   <form action="listadoestacionados.php" method="GET">
-              <div class="well">
-                  <div class="col-xs-3">
-                 <div class="input-group">
-
-
-                  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                  <input type="text" class="form-control" placeholder="20/02/2017" <?php if(isset($_GET['fechabuscar'])){ echo "value='".$_GET['fechabuscar']."'";} ?> aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
-                  </div>
-                       </div>
-                       <button type="submit" class="btn btn-default">Buscar</button> 
-                       <?php 
-
-                       if(isset($_GET['fechabuscar'])){
-                       echo("<a href='listadoestacionados.php' class='btn btn-info' role='button'><span class='glyphicon glyphicon-arrow-left'></span>Volver</a>");}
-                       ?>
-                       </div>
-            </form>
+  <h3>Se listan solo registros no pagados:</h3>
 <br><br>
 
 
@@ -55,7 +37,7 @@ left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_v
   else{
   $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos`
 
-left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where DATE(ingreso_vehiculos.fecha_inicio) >= DATE(NOW()) - INTERVAL 1 DAY order by ingreso_vehiculos.id desc";
+left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where ingreso_vehiculos.pagado = 0 order by ingreso_vehiculos.id desc";
   }
 
 
@@ -83,13 +65,11 @@ echo '<tr><td>'.$fila['id'].'</td>';
 echo '<td>'.$fila['patente'].'</td>';
 echo '<td>'.$fila['chofer'].'</td>';
 echo '<td>'.$fila['fecha_inicio_2'].'</td>';
-
  if ($fila['pagado']=='1'){
 echo '<td>'.$fila['fecha_termino_2'].'</td>';
 } else{
   echo '<td>-</td>';
 }
-
 echo '<td>'.$fila['hora_inicio'].'</td>';
  if ($fila['pagado']=='1'){
 

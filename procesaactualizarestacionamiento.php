@@ -30,7 +30,7 @@ include_once("conexion.php");
     	$chofer = $_GET['chofer'];
         $fecha_inicio =  $_GET['fecha'];
 
-
+        $id_formato_boleta = $_GET['id_formato_boleta'];
 		$pagado =$_GET['pagado'];
 		$hora_inicio =$_GET['horainicio'];
 		$hora_termino=$_GET['horasalida'];
@@ -41,13 +41,15 @@ include_once("conexion.php");
 
         $fecha_termino = $_GET['fechatermino'];
 
+
+
         $fechaTransformadaInicio = transforma_fecha_hora_guardar($fecha_inicio,$hora_inicio);
        $fechaTransformadaSalida = transforma_fecha_hora_guardar($fecha_termino,$hora_termino);
 		
          $con = new DB;
             $crearpersona = $con->conectar();
             $strConsulta = "update `ingreso_vehiculos` set `patente` = '$patente',`chofer` = '$chofer',`fecha_inicio` = '$fechaTransformadaInicio',`hora_termino` = '$hora_termino',`hora_inicio` = '$hora_inicio',`pagado` = '$pagado',
-             `monto` = '$monto_total',`correlativo_papel` = '$correlativo_papel',`fecha_termino` = '$fechaTransformadaSalida',`rut` = '$rut',`rut_cliente` = '$rut_cliente' where id = $voucher";
+             `monto` = '$monto_total',`correlativo_papel` = '$correlativo_papel',`fecha_termino` = '$fechaTransformadaSalida',`id_formato_boleta` = '$id_formato_boleta',`rut` = '$rut',`rut_cliente` = '$rut_cliente' where id = $voucher";
 
             //echo $strConsulta;
            if(mysql_query($strConsulta)){
@@ -66,7 +68,10 @@ include_once("conexion.php");
 
     
     } catch (Exception $e) {
+
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
+
+   
     } finally {
     	
 

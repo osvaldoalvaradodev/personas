@@ -111,9 +111,7 @@
                 </button>
                 <!--<a class="navbar-brand" href="#">inicio</a>-->
 
-                 <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-time"></span><?php echo(date("H:i:s"));?>
-                    <span class="glyphicon glyphicon-calendar"></span>
-                 <?php echo(" ".date("d-m-Y"));?></a>
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -167,7 +165,9 @@
                                   Vehiculos<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a href="listadoestacionados.php">Listar Vehiculos</a></li>
+                                  <li><a href="listadoestacionados.php">Listado Vehiculos Actuales</a></li>
+                                        <li><a href="listadoestacionadosdeuda.php">Listado Vehiculos con Deuda</a></li>
+
                                   <li class="<?php ocultar_elemento(99);?>"><a href="reporteci.php">Reporte CI (Factura)</a></li>
                                   <li  class="<?php ocultar_elemento(99);?>"><a href="reporteconvenio.php">Reporte Convenio</a></li>
                                  </ul>

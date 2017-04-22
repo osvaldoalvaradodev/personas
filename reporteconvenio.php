@@ -24,8 +24,8 @@ valida_usuario(10);
   ?>
 
   <div class="well">
-  <h2>Ingrese los datos para generar reporte CI (factura)</h2>
-   <form action="reporteci.php" method="GET">
+  <h2>Ingrese los datos para generar reporte Convenio</h2>
+   <form action="reporteconvenio.php" method="GET">
               <div class="form-group">
                   <div class="col-xs-3">
                  <div class="input-group">
@@ -60,8 +60,8 @@ valida_usuario(10);
     $mesbuscado =$_GET['mesbuscar'];
      $aniobuscado =$_GET['aniobuscar'];
     $rutbuscado =$_GET['rutbuscar'];
-     $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos` left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo left join cliente on ingreso_vehiculos.rut_cliente = cliente.rut_cliente where MONTH(ingreso_vehiculos.fecha_inicio) = $mesbuscado and YEAR(ingreso_vehiculos.fecha_inicio) = $aniobuscado and ingreso_vehiculos.rut_cliente = '$rutbuscado'
-and ingreso_vehiculos.id_formato_boleta = 2";
+     $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos` left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo where MONTH(ingreso_vehiculos.fecha_inicio) = $mesbuscado and YEAR(ingreso_vehiculos.fecha_inicio) = $aniobuscado and ingreso_vehiculos.rut = '$rutbuscado'
+and ingreso_vehiculos.id_formato_boleta = 3";
 
     
   }
@@ -90,15 +90,15 @@ for ($i=0; $i<$numregistros2; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros2);
 $monto_total= intval($fila['monto']) + $monto_total;
-$nombre_cliente = $fila['nombre_cliente'];
+
 }
 ?>
 
 <?php
-$nombre_titulo="<div class='well'>Rut     : ".$rutbuscado."<br>Cliente : ".$nombre_cliente." <br>Mes    : ".$mesbuscado." Año: ".$aniobuscado."<br>Monto  : $".$monto_total."</div>";
+$nombre_titulo="<div class='well'>Rut     : ".$rutbuscado." <br>Mes    : ".$mesbuscado." Año: ".$aniobuscado."<br>Monto  : $".$monto_total."</div>";
 ?>
 <script language="JavaScript">
-window.document.title = "Reporte Facturacion Estacionamiento";
+window.document.title = "Reporte Convenio Estacionamiento";
 
 
 var titulo_reporte = "<?php echo $nombre_titulo; ?>";
@@ -138,7 +138,7 @@ $(document).ready(function() {
                     $(win.document.body)
                         .css( 'font-size', '10pt' )
                         .prepend(
-                            '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                            ''
                         );
  
                     $(win.document.body).find( 'table' )
@@ -162,7 +162,7 @@ $(document).ready(function() {
 
 
 <h3>Rut a Facturar: <?php echo $rutbuscado?></h3>
-<h3>Cliente: <?php echo $nombre_cliente?></h3>
+
 <h3>Mes : <?php echo $mesbuscado." - Año :".$aniobuscado?></h3>
 <h3>Monto Total: $<?php echo $monto_total?></h3>
 
@@ -176,7 +176,7 @@ $numregistros = mysql_num_rows($buscarregistros);
 
 
     echo '<table class="display" id="tablafactura" cellspacing="0" width="100%">';
-echo '<thead><tr><th>Id</th><th>Patente</th><th>Chofer</th><th>Fecha Ingreso</th><th>Hora Ingreso</th><th>Fecha Salida</th><th>Hora Salida</th><th>Monto</th><th>Pagado</th></tr></thead>';
+echo '<thead><tr><th>Id</th><th>Patente</th><th>Chofer</th><th>Fecha</th><th>Hora Ingreso</th><th>Fecha Salida</th><th>Hora Salida</th><th>Monto</th><th>Pagado</th></tr></thead>';
 for ($i=0; $i<$numregistros; $i++)
 {
 $fila = mysql_fetch_array($buscarregistros);
@@ -191,12 +191,13 @@ echo '<th>'.$fila['fecha_inicio_2'].'</th>';
 echo '<th>'.$fila['hora_inicio'].'</th>';
  if ($fila['pagado']=='1'){
 
-          echo '<th>'.$fila['fecha_termino_2'].'</th>'; 
+
           echo '<th>'.$fila['hora_termino'].'</th>';  
+            echo '<th>'.$fila['fecha_termino_2'].'</th>';  
           }
           else{
               echo '<th>-</th>';
-              echo '<th>-</th>';
+                   echo '<th>-</th>';
           }
 
 //sumo monto por cada iteracion
@@ -215,12 +216,12 @@ echo '<th>'.$fila['monto'].'</th>';
           echo '<th><span class="label label-success">Pagado</span></th>';  
 
 
-        
+           
           }
           else{
               echo '<th><span class="label label-danger">No Pagado</span></th>';
           
-        
+       
           }
 
         
