@@ -27,7 +27,7 @@ valida_usuario(10);
 
 
                   <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                  <input type="text" class="form-control" placeholder="20/02/2017" <?php if(isset($_GET['fechabuscar'])){ echo "value='".$_GET['fechabuscar']."'";} ?> aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
+                  <input type="text" class="form-control" placeholder="<?php echo date("d/m/Y");?>" <?php if(isset($_GET['fechabuscar'])){ echo "value='".$_GET['fechabuscar']."'";} ?> aria-describedby="basic-addon1" id="fechabuscar" name="fechabuscar">
                   </div>
                        </div>
                        <button type="submit" class="btn btn-default">Buscar</button> 
@@ -48,22 +48,22 @@ valida_usuario(10);
     $fecha_consultada =$_GET['fechabuscar'];
       $strConsultaTotal = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
 left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where date_format(ingreso_vehiculos.fecha_inicio,'%d/%m/%Y') = date_format(str_to_date('$fecha_consultada','%d/%m/%Y') ,'%d/%m/%Y')  
-and ingreso_vehiculos.id_formato_boleta = 1  or  ingreso_vehiculos.id_formato_boleta = 2 and ingreso_vehiculos.estado =1
+and (ingreso_vehiculos.id_formato_boleta = 1  or  ingreso_vehiculos.id_formato_boleta = 2) and ingreso_vehiculos.estado =1
 
 order by ingreso_vehiculos.id desc";
 
  }
   else{
-    $fecha_consultada = date("d-m-Y");
+    $fecha_consultada = date("d/m/Y");
        $strConsultaTotal = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
-left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where DATE(ingreso_vehiculos.fecha_inicio) = DATE(NOW())  
-and ingreso_vehiculos.id_formato_boleta = 1  or  ingreso_vehiculos.id_formato_boleta = 2 and ingreso_vehiculos.estado =1
+left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where date_format(ingreso_vehiculos.fecha_inicio,'%d/%m/%Y') = date_format(str_to_date('$fecha_consultada','%d/%m/%Y') ,'%d/%m/%Y')   
+and (ingreso_vehiculos.id_formato_boleta = 1  or  ingreso_vehiculos.id_formato_boleta = 2) and ingreso_vehiculos.estado =1
 
 order by ingreso_vehiculos.id desc";
   }
 
 
-
+//echo $strConsultaTotal;
 
 $con3 = new DB;
 $buscartotal = $con3->conectar();
