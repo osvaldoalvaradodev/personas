@@ -42,8 +42,8 @@ include_once("conexion.php");
 
 
     include('imprimirvoucher.php');
-    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario1,$correlativo_papel,$rut_cliente,$fecha_termino_2);
-        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario2,$correlativo_papel,$rut_cliente,$fecha_termino_2);
+    	imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario1,$correlativo_papel,$rut_cliente,$fecha_termino_2,$fecha_inicio_2);
+        imprimir_voucher_estacionamiento($voucher,$chofer,$patente,$hora_inicio,$hora_termino,$monto_total,$comentario2,$correlativo_papel,$rut_cliente,$fecha_termino_2,$fecha_inicio_2);
     } catch (Exception $e) {
     	echo "<div class='alert alert-danger'><strong>Error $e</strong></div>";
     } finally {

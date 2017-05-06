@@ -45,7 +45,7 @@ $patente =$row['patente'];
   $fecha_inicio_2 =$row['fecha_inicio_2'];
   $hora_inicio =$row['hora_inicio'];
   $fecha_inicio=$row['fecha_inicio'];
-
+  $estado = $row['estado'];
   $hora_termino = $row['hora_termino'];
  $monto = $row['monto'];
    $id_tipo = $row['id_tipo'];
@@ -118,6 +118,25 @@ $from_time = strtotime(date("H:i:s"));
 
       </div>
     </div>
+
+      <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Estado</label>
+      <div class="col-sm-4">
+              <?php 
+              if ($estado==1) {
+
+                echo "Habilitado";
+                # code...
+              }else{
+                echo "Nulo";
+
+              }
+
+              ?>
+      </div>
+    </div>
+
+
 
         <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Fecha Ingreso</label>
@@ -224,27 +243,26 @@ $from_time = strtotime(date("H:i:s"));
       <div class="col-sm-4">
         <select class="form-control" id='rut_cliente' name='rut_cliente'>
              <option value="<?php echo $rut_cliente?>"><?php echo $nombre_cliente?></option>
-             <option value='0'>Sin Cliente</option>
-             <option value='14424190'>Dagoberto Turra Yanez</option>
-              <option value='96627500'>Danisco Chile Sa</option>
-              <option value='5374148'>Henrique Escala Gonzalez</option>
-              <option value='7852371'>Fernando Ampuero Pacheco</option>
-              <option value='76594830'>Transportes Soto y Marin</option>
-              <option value='7173911'>Luis Seron Vera</option>
-              <option value='8577270'>Luis Lizama Almonacid</option>
-              <option value='11310101'>Manuel Soto Villaroel</option>
-              <option value='8756011'>Monica Meneses Uribe</option>
-              <option value='6686732'>Nelson Gallardo Gallardo</option>
-              <option value='8915293'>Oscar Oyarzun Velasquez</option>
-              <option value='10359368'>Pedro Ulloa Sanches</option>
-              <option value='76472531'>Quinchao Cargo Limitada</option>
-              <option value='10827987'>Santiago Cadin</option>
-              <option value='16047220'>Sebastian Nunez Gonzalez</option>
-              <option value='76384120'>Sociedad Efrain Andrade e Hijos</option>
-              <option value='89042600'>Sociedad Agromar Limitda</option>
-              <option value='76422357'>Sociedad de Inversiones Isla Guafo</option>
-              <option value='76194520'>Sociedad Proa Limitada</option>
-              <option value='8210971'>Orieta Bahamonde Oyarzun</option>
+        
+
+
+             <?php 
+
+             $strConsultaCliente = "select * from cliente where cliente.estado =1";
+             $buscarcliente = $con2->conectar();
+              $buscarcliente = mysql_query($strConsultaCliente);
+              $numregistrosClientes = mysql_num_rows($buscarcliente);
+              for ($i=0; $i<$numregistrosClientes; $i++)
+              {
+              $fila = mysql_fetch_array($buscarcliente);
+              $rut_cliente = $fila['rut_cliente'];
+              $nombre_cliente = $fila['nombre_cliente'];
+
+              echo "<option value='$rut_cliente'>$nombre_cliente</option>";
+              
+              }
+             ?>
+             
 
            
         </select>
@@ -294,6 +312,8 @@ $from_time = strtotime(date("H:i:s"));
       </div>
     </div>
     <label for="inputEmail3" class="col-sm-2 col-form-label">                   </label>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-check" aria-hidden="true"></i>Habilitar Registro</button>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal2"><i class="fa fa-ban" aria-hidden="true"></i>Anular Registro</button>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-ban" aria-hidden="true"></i>Eliminar Registro</button>
       <button type="submit" class="btn btn-success" id="boton1" name="boton1"><i class="fa fa-check" aria-hidden="true"></i>Guardar Cambios</button>
     </form> 
@@ -329,6 +349,50 @@ $from_time = strtotime(date("H:i:s"));
       </div>
       <div class="modal-footer">
       <a <?php echo "href='procesaeliminarestacionamiento.php?id=$id'";?> class="btn btn-danger" role="button">Eliminar Registro</a>
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Esta Seguro que desea Anular este Registro?</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿Desea Anular Este Registro?</p>
+      </div>
+      <div class="modal-footer">
+      <a <?php echo "href='procesaanularestacionamiento.php?id=$id&estado=0'";?> class="btn btn-danger" role="button">Anular Registro</a>
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModal3" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Esta Seguro que desea Habilitar este Registro?</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿Desea Habilitar Este Registro?</p>
+      </div>
+      <div class="modal-footer">
+      <a <?php echo "href='procesaanularestacionamiento.php?id=$id&estado=1'";?> class="btn btn-primary" role="button">Habilitar</a>
     
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>

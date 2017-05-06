@@ -185,7 +185,7 @@ $(document).ready(function() {
 
            $("#mesbuscar").mask("99");
                  $("#aniobuscar").mask("9999");
-                       $("#rutbuscar").mask("99999999");
+                     //  $("#rutbuscar").mask("99999999");
 
         /*
         $("#phoneExt").mask("(999) 999-9999? x99999");

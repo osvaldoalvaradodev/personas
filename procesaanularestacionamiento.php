@@ -26,15 +26,15 @@ include_once("conexion.php");
     try {
 
     	$voucher = $_GET['id'];
-     
+            $estado = $_GET['estado'];
 		
          $con = new DB;
             $crearpersona = $con->conectar();
-            $strConsulta = "delete from `ingreso_vehiculos` where id = $voucher";
+            $strConsulta = "update `ingreso_vehiculos` set estado=$estado where id = $voucher";
 
             //echo $strConsulta;
            if(mysql_query($strConsulta)){
-            echo "<div class='alert alert-success'><strong>Se ha Eliminado Correctamente el Registro</strong></div>";
+            echo "<div class='alert alert-success'><strong>Se ha Modificado Correctamente el Registro</strong></div>";
 
            }else
            {
@@ -59,8 +59,8 @@ include_once("conexion.php");
 
     }
     
-    echo("<a href='listadoestacionados.php' class='btn btn-info' role='button'><span class='glyphicon glyphicon-arrow-left'></span>  Volver</a>");
-    
+    echo("<a href='editarregistroestacionamiento.php?id=$voucher' class='btn btn-info' role='button'><span class='glyphicon glyphicon-arrow-left'></span>  Volver</a>");
+
     ?>
     </div>
    	

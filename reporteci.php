@@ -27,13 +27,53 @@ valida_usuario(10);
   <h2>Ingrese los datos para generar reporte CI (factura)</h2>
    <form action="reporteci.php" method="GET">
               <div class="form-group">
-                  <div class="col-xs-3">
+                  <div class="col-xs-4">
                  <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
                   <input type="text" class="form-control" placeholder="02 (mes...)" aria-describedby="basic-addon1" id="mesbuscar" name="mesbuscar">
                    <input type="text" class="form-control" placeholder="2017 (año...)" aria-describedby="basic-addon1" id="aniobuscar" name="aniobuscar">
 
-                  <input type="text" class="form-control" placeholder="17999388 (Rut...)" aria-describedby="basic-addon1" id="rutbuscar" name="rutbuscar">
+                 
+
+
+
+
+      
+      
+        <select class="form-control" id='rutbuscar' name='rutbuscar'>
+          <option value='0'>Sin Cliente</option>
+              <?php 
+               include_once("conexion.php");
+
+
+
+            $con2 = new DB;
+             $strConsultaCliente = "select * from cliente where cliente.estado =1";
+             $buscarcliente = $con2->conectar();
+              $buscarcliente = mysql_query($strConsultaCliente);
+              $numregistrosClientes = mysql_num_rows($buscarcliente);
+              for ($i=0; $i<$numregistrosClientes; $i++)
+              {
+              $fila = mysql_fetch_array($buscarcliente);
+              $rut_cliente = $fila['rut_cliente'];
+              $nombre_cliente = $fila['nombre_cliente'];
+
+              echo "<option value='$rut_cliente'>$nombre_cliente</option>";
+              
+              }
+             ?>
+
+           
+        </select>
+      
+  
+
+
+
+
+
+
+
                   </div>
                        </div>
                        <button type="submit" class="btn btn-default">Buscar</button> 
@@ -42,6 +82,15 @@ valida_usuario(10);
                        if(isset($_GET['fechabuscar'])){
                        echo("<a href='listadoestacionados.php' class='btn btn-info' role='button'><span class='glyphicon glyphicon-arrow-left'></span>Volver</a>");}
                        ?>
+
+
+
+
+
+
+
+
+
                        </div>
             </form>
 
@@ -61,7 +110,7 @@ valida_usuario(10);
      $aniobuscado =$_GET['aniobuscar'];
     $rutbuscado =$_GET['rutbuscar'];
      $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos` left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo left join cliente on ingreso_vehiculos.rut_cliente = cliente.rut_cliente where MONTH(ingreso_vehiculos.fecha_inicio) = $mesbuscado and YEAR(ingreso_vehiculos.fecha_inicio) = $aniobuscado and ingreso_vehiculos.rut_cliente = '$rutbuscado'
-and ingreso_vehiculos.id_formato_boleta = 2";
+and ingreso_vehiculos.id_formato_boleta = 2 and ingreso_vehiculos.estado =1";
 
     
   }

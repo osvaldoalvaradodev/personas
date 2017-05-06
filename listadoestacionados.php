@@ -8,6 +8,10 @@ session_start();
 
 <?php 
 valida_usuario(10);
+
+
+
+
 ?>
 
 
@@ -34,13 +38,58 @@ valida_usuario(10);
                        ?>
                        </div>
             </form>
-<br><br>
 
 
+    <div class="well">
+      <?php 
+ include_once("conexion.php");
+
+ if(isset($_GET['fechabuscar'])){
+    $fecha_consultada =$_GET['fechabuscar'];
+      $strConsultaTotal = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
+left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where date_format(ingreso_vehiculos.fecha_inicio,'%d/%m/%Y') = date_format(str_to_date('$fecha_consultada','%d/%m/%Y') ,'%d/%m/%Y')  
+and ingreso_vehiculos.id_formato_boleta = 1  or  ingreso_vehiculos.id_formato_boleta = 2 and ingreso_vehiculos.estado =1
+
+order by ingreso_vehiculos.id desc";
+
+ }
+  else{
+    $fecha_consultada = date("d-m-Y");
+       $strConsultaTotal = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2 FROM `ingreso_vehiculos`
+left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo  where DATE(ingreso_vehiculos.fecha_inicio) = DATE(NOW())  
+and ingreso_vehiculos.id_formato_boleta = 1  or  ingreso_vehiculos.id_formato_boleta = 2 and ingreso_vehiculos.estado =1
+
+order by ingreso_vehiculos.id desc";
+  }
+
+
+
+
+$con3 = new DB;
+$buscartotal = $con3->conectar();
+$buscartotal = mysql_query($strConsultaTotal);
+$numtotal = mysql_num_rows($buscartotal);
+
+//recorro para obtener el total
+$monto_total = 0;
+$nombre_cliente = "";
+for ($i=0; $i<$numtotal; $i++)
+{
+$fila = mysql_fetch_array($buscartotal);
+$monto_total= intval($fila['monto']) + $monto_total;
+
+}
+?>
+
+    <b>Monto en Caja:  
+  <?php 
+echo $monto_total." Fecha: ".$fecha_consultada;
+?></b>
+     </div>
 
 
 <?php 
-     include_once("conexion.php");
+    
           //si el rut es * CUALQUIERA
   
 
@@ -64,7 +113,7 @@ left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_v
 
 
  $con = new DB;
-    $buscarregistros = $con->conectar();
+$buscarregistros = $con->conectar();
 $buscarregistros = mysql_query($strConsulta);
 $numregistros = mysql_num_rows($buscarregistros);
 

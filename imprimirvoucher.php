@@ -20,7 +20,7 @@ use Mike42\Escpos\EscposImage;
 
 
 
-function imprimir_voucher_estacionamiento($numero,$chofer,$patente,$horainicio,$horatermino,$montototal,$comentario,$correlativopapel,$cliente,$fecha_termino){
+function imprimir_voucher_estacionamiento($numero,$chofer,$patente,$horainicio,$horatermino,$montototal,$comentario,$correlativopapel,$cliente,$fecha_termino,$fecha_inicio_2){
 try {
     // Enter the share name for your USB printer here
     //$connector = null;  
@@ -65,7 +65,7 @@ try {
     if ($correlativopapel != 0) {
     $printer -> text("\nCorrelativo    : $correlativopapel\n");
     }
-    $printer -> text("Fecha Inicio    : $fecha\n");
+    $printer -> text("Fecha Inicio    : $fecha_inicio_2\n");
     $printer -> text("Hora de inicio  : $horainicio\n");
 
 

@@ -61,7 +61,7 @@ valida_usuario(10);
      $aniobuscado =$_GET['aniobuscar'];
     $rutbuscado =$_GET['rutbuscar'];
      $strConsulta = "SELECT *,DATE_FORMAT(ingreso_vehiculos.fecha_inicio, '%d-%m-%Y') as fecha_inicio_2,DATE_FORMAT(ingreso_vehiculos.fecha_termino, '%d-%m-%Y') as fecha_termino_2 FROM `ingreso_vehiculos` left join tipo_vehiculos on ingreso_vehiculos.id_tipo = tipo_vehiculos.id_tipo_vehiculo where MONTH(ingreso_vehiculos.fecha_inicio) = $mesbuscado and YEAR(ingreso_vehiculos.fecha_inicio) = $aniobuscado and ingreso_vehiculos.rut = '$rutbuscado'
-and ingreso_vehiculos.id_formato_boleta = 3";
+and ingreso_vehiculos.id_formato_boleta = 3 and ingreso_vehiculos.estado =1";
 
     
   }

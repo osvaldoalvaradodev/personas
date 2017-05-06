@@ -152,11 +152,11 @@
 
                             <li class="dropdown <?php ocultar_elemento(98);?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  Usuarios <b class="caret"></b>
+                                 Personas <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a href="agregarusuario.php">Agregar Nuevo Usuario</a></li>
-                                  <li><a href="editarusuarios.php">Editar Usuarios Existentes</a></li>
+                                  <li><a href="agregarusuario.php">Agregar Nueva persona</a></li>
+                                  <li><a href="editarusuarios.php">Editar Personas Existentes</a></li>
                                  </ul>
                             </li>
 
@@ -170,6 +170,7 @@
 
                                   <li class="<?php ocultar_elemento(99);?>"><a href="reporteci.php">Reporte CI (Factura)</a></li>
                                   <li  class="<?php ocultar_elemento(99);?>"><a href="reporteconvenio.php">Reporte Convenio</a></li>
+                                  <li  class="<?php ocultar_elemento(99);?>"><a href="buscarticket.php">Buscar Ticket por ID</a></li>
                                  </ul>
                             </li>
 
