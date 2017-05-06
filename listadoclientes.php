@@ -63,7 +63,7 @@ echo '<td>'.$fila['nombre_cliente'].'</td>';
           else{
               echo '<td><span class="label label-danger">Inactivo</span></td>';
           }
-echo "<td><a href='procesaeditarcliente.php?rut=".$fila['rut_cliente']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span> Editar</a></td>";
+echo "<td><a href='editarcliente.php?rut=".$fila['rut_cliente']."' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span> Editar</a></td>";
         
 
 echo '</tr>';

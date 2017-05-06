@@ -171,6 +171,8 @@
                                   <li class="<?php ocultar_elemento(99);?>"><a href="reporteci.php">Reporte CI (Factura)</a></li>
                                   <li  class="<?php ocultar_elemento(99);?>"><a href="reporteconvenio.php">Reporte Convenio</a></li>
                                   <li  class="<?php ocultar_elemento(99);?>"><a href="buscarticket.php">Buscar Ticket por ID</a></li>
+
+                                  <li  class="<?php ocultar_elemento(99);?>"><a href="nuevocliente.php">Nuevo CLiente CI</a></li>
                                  </ul>
                             </li>
 

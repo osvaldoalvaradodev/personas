@@ -125,10 +125,10 @@ $from_time = strtotime(date("H:i:s"));
               <?php 
               if ($estado==1) {
 
-                echo "Habilitado";
+                echo "<div class='alert alert-success' role='alert'>Voucher Activo</div>";
                 # code...
               }else{
-                echo "Nulo";
+                echo "<div class='alert alert-danger' role='alert'>Voucher Nulo</div>";
 
               }
 
