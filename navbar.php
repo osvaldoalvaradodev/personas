@@ -173,6 +173,7 @@
                                   <li  class="<?php ocultar_elemento(99);?>"><a href="buscarticket.php">Buscar Ticket por ID</a></li>
 
                                   <li  class="<?php ocultar_elemento(99);?>"><a href="nuevocliente.php">Nuevo CLiente CI</a></li>
+                                   <li  class="<?php ocultar_elemento(99);?>"><a href="listadoclientes.php">Listado Clientes CI</a></li>
                                  </ul>
                             </li>
 
