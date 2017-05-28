@@ -80,11 +80,12 @@ $monto_total= intval($fila['monto']) + $monto_total;
 
 }
 ?>
-
-    <b>Monto en Caja : $  
+    <div class="alert alert-success">
+    Monto en Caja Hoy : <strong>$  
   <?php 
-echo $monto_total." Fecha: ".$fecha_consultada;
-?></b>
+echo $monto_total."</strong><br> Fecha:  <strong>".$fecha_consultada;
+?></strong>
+</div>
      </div>
 
 
